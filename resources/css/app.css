@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    @apply p-0 m-0 ;
+}
+
+.navigation {
+    @apply absolute flex h-12 w-12 items-center justify-center group-hover:-translate-y-8 transition-all group-hover:bg-primary group-hover:border-slate-700 group-hover:border-4 group-hover:rounded-full group-hover:before:content-[''] before:delay-75 after:delay-75 before:transition-all after:transition-all group-hover:before:absolute group-hover:before:top-1/2 group-hover:before:left-[-20px] group-hover:before:rounded-tr-2xl group-hover:before:w-[20px] group-hover:before:h-[20px] group-hover:before:shadow-slate-700 group-hover:before:shadow-[0px_-10px_0px] group-hover:after:content-[''] group-hover:after:absolute group-hover:after:top-1/2 group-hover:after:right-[-20px] group-hover:after:rounded-tl-2xl group-hover:after:w-[20px] group-hover:after:h-[20px] group-hover:after:shadow-slate-700 group-hover:after:shadow-[0px_-10px_0px]
+};
+.navigation-active {
+    @apply -translate-y-8 transition-all bg-primary border-slate-700 border-4 rounded-full before:content-[''] before:absolute before:top-1/2 before:left-[-20px] before:rounded-tr-2xl before:w-[20px] before:h-[20px] before:shadow-slate-700 before:shadow-[0px_-10px_0px] after:content-[''] after:absolute after:top-1/2 after:right-[-20px] after:rounded-tl-2xl after:w-[20px] after:h-[20px] after:shadow-slate-700 after:shadow-[0px_-10px_0px]
+}
