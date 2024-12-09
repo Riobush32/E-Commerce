@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('variants', function (Blueprint $table) {
             $table->id();
-            // $table->string('name');
-            // $table->string('icon');
-            // $table->string('color');
+            //foreign key variant
+            $table->foreignId('product_id')->constrained(
+                table: 'products',
+                indexName: 'product_variant_id'
+            );
+            $table->double('weight');
+            $table->double('stock');
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('variants');
     }
 };

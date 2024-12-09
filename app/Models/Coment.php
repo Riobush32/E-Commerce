@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PromoCode extends Model
+class Coment extends Model
 {
     //
 }
