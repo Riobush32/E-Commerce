@@ -14,4 +14,10 @@ class CartController extends Controller
         }
         return redirect()->back()->with(['warning' => 'kamu harus login terlebih dahulu']);
     }
+
+    public function destroy($id){
+        $cart = Cart::find($id);
+        $cart->delete();
+        return redirect()->back()->with(['success' => 'data berhasil dihapus']);
+    }
 }

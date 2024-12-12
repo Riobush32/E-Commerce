@@ -1,4 +1,4 @@
-<div class="absolute right-20 z-20">
+<div class="fixed right-20 z-20">
     @if ($message = Session::get('warning'))
         <div x-data="{ tampil: true }">
             <div x-init="setTimeout(() => tampil = false, 3000)" x-show="tampil" role="alert" class="alert alert-warning ">

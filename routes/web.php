@@ -9,6 +9,7 @@ Route::get('/detail-product/{id}', [ProductController::class,'productDetails'])-
 Route::post('/detail-product', [ProductController::class, 'addToCart'])->name('addToCart');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::delete('/cart/{id}/', [CartController::class, 'destroy'])->name('cartDestroy');
 
 Route::get('/detail-product', function () {
     return view('page.detailProduct.index');

@@ -23,8 +23,11 @@ class ProductController extends Controller
     public function addToCart(Request $request){
         if(!$request->user_id){
             return redirect()->back()->with(['warning' => 'kamu harus login terlebih dahulu']);
-        }
-        else if(!$request->notes){
+        }else{
+            if(!$request->variant){
+                return redirect()->back()->with(['warning' => 'tolong pilih variant produk']);
+            }
+            if(!$request->notes){
                 Cart::create([
                     'user_id' => $request->user_id,
                     'variant_id' => $request->variant,
@@ -45,6 +48,8 @@ class ProductController extends Controller
         else{
                 return redirect()->back()->with(['error' => 'ada kesalahan tidak dapat menambahkan data']);
             }
+        }
+
 
     }
 }

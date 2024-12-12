@@ -1,13 +1,22 @@
 <div>
+    <x-flash-message></x-flash-message>
+
     <div class="my-5">
         <h1 class="text-2xl">Shopping bag</h1>
         <h2>{{ $carts->count() }} items <span class="text-gray-500">in your bag.</span></h2>
     </div>
     {{-- cart  --}}
-    <div class="flex gap-3" x-data="{ selectedItems: [] }">
+    <div class="flex gap-3 relative" x-data="{
+        selectedItems: [],
+        modal: false,
+        modalData: null,
+        getDeleteUrl() {
+            return `{{ route('cartDestroy', '') }}/${this.modalData}`;
+        }
+    }">
         <div class="w-4/5">
 
-            <div class="grid grid-cols-5 gap-4 w-full " x-data="{ count: 0, price: 300000 }">
+            <div class="grid grid-cols-5 gap-4 w-full " x-data="{ count: 0, price: 0 }">
                 {{-- table head --}}
                 <div style="grid-column: span 2">Products</div>
                 <div class="">Price</div>
@@ -16,12 +25,21 @@
             </div>
             @foreach ($carts as $cart)
                 <input type="checkbox" id="product-{{ $cart->id }}" value="{{ $cart->id }}"
-                    x-model="selectedItems" class="hidden">
+                    x-model="selectedItems" class="hidden" wire:model.live="selectedItems">
                 <label for="product-{{ $cart->id }}" class="p-2 rounded-xl  grid grid-cols-5 gap-4 w-full mt-5"
                     :class="selectedItems.includes('{{ $cart->id }}') ? 'border border-primary shadow-xl' : ''"
-                    x-data="{ count: {{ $cart->quantity }}, price: {{ $cart->variant->product->price }} }">
+                    x-data="{
+                        count: {{ $cart->quantity }},
+                        price: {{ $cart->variant->product->price }},
+                        quantity: {{ $cart->quantity }},
+
+                        updateQuantity() {
+                            $wire.updateQuantity({{ $cart->id }}, this.quantity)
+                        }
+                    }">
                     <div class="flex gap-3 " style="grid-column: span 2">
-                        <a href="{{ route('productDetails',['id'=> $cart->variant->product->id]) }}" class="w-1/3 overflow-hidden rounded-xl">
+                        <a href="{{ route('productDetails', ['id' => $cart->variant->product->id]) }}"
+                            class="w-1/3 overflow-hidden rounded-xl">
                             <img src="{{ $cart->variant->product->product_photos->first()->photo_patch }}"
                                 alt="">
                         </a>
@@ -42,17 +60,36 @@
                         </h1>
                     </div>
                     <div class="items-center flex">
-                        <div class="join join-vertical lg:join-horizontal mt-2 border-[1px]">
+                        <div class="join join-vertical lg:join-horizontal mt-2 border-[1px]" x-data="{
+
+                        }">
                             <button class="btn btn-sm join-item text-lg font-bold"
-                                @click="count != 0 ? count-- : count = 0">-</button>
-                            <input class="input input-sm w-24 join-item text-center" :value="count" />
-                            <button class="btn btn-sm join-item text-lg font-bold" @click="count++">+</button>
+                                @click="quantity > 1 ? quantity-- : quantity = 1; updateQuantity()">-</button>
+                            <input class="input input-sm w-24 join-item text-center" x-model.number="quantity"
+                                @change="updateQuantity()" min="1" />
+                            <button class="btn btn-sm join-item text-lg font-bold"
+                                @click="quantity++; updateQuantity()">+</button>
                         </div>
                     </div>
-                    <div class="items-center flex">
-                        <h1 class="text-primary"> <span
-                                x-text="new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price*count)"></span>
-                        </h1>
+                    <div class="items-center flex gap-4">
+                        <div class="">
+                            <h1 class="text-primary">
+                                <span
+                                    x-text="new Intl.NumberFormat('id-ID', {
+                                    style: 'currency',
+                                    currency: 'IDR'
+                                }).format(price * quantity)"
+                                    class="text-primary"></span>
+
+                            </h1>
+                        </div>
+                        <div class="">
+                            <button @click="modal = true, modalData = {{ $cart->id }}"
+                                class="btn btn-outline btn-error">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+
                     </div>
                 </label>
             @endforeach
@@ -65,7 +102,7 @@
             <div class="fixed bottom-16 h-[70vh] p-3 w-1/5">
                 <div class="text-right ">
                     <h1 class="text-2xl">Summary</h1>
-                    <h1 class="text-secondary">2 items slected</h1>
+                    <h1 class="text-secondary"><span x-text="selectedItems"></span> items slected</h1>
                     <hr class="mt-3 border-black">
                 </div>
                 {{-- voucher --}}
@@ -89,8 +126,10 @@
                 {{-- detail total  --}}
                 <div class="mt-5">
                     <div class="grid grid-cols-2 gap-1 justify-between">
-                        <div class="text-secondary">Subtotal</div>
-                        <div class="text-right">Rp 300.000</div>
+                        <div class="text-secondary ">Subtotal</div>
+                        <div class="text-right">
+                            Rp {{ number_format($this->subtotal, 0, ',', '.') }}
+                        </div>
                         <div class="text-secondary">Shipping & Handing</div>
                         <div class="text-right">Rp 20.000</div>
                         <div class="text-secondary">Discount</div>
@@ -119,5 +158,28 @@
 
 
         </div>
+
+        <div class="w-full fixed flex justify-center" x-show="modal"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+            <div class="" @click.outside="modal = false">
+                <div class="modal-box bg-primary min-w-96">
+                    <h3 class="text-lg font-bold">Warning!</h3>
+                    <p class="py-4">Are you sure you want to delete this <span x-text="modalData"></span> item from
+                        your cart? </p>
+                    <div class="modal-action">
+                        <form method="post" :action="getDeleteUrl()">
+                            @csrf
+                            @method('delete')
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn" @click="modal = false">Close</button>
+                            <button class="btn" type="submit">Yes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
