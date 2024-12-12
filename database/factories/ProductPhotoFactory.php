@@ -19,7 +19,7 @@ class ProductPhotoFactory extends Factory
     {
         return [
             'product_id' => Product::factory(),
-            'photo_patch' => fake()->imageUrl(360,360, 'animals', true),
+            'photo_patch' => fake()->imageUrl(360,360, 'products', true),
         ];
     }
 }

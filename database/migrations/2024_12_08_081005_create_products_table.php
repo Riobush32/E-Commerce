@@ -28,6 +28,7 @@ return new class extends Migration
             $table->double('rating')->nullable();
             $table->double('sold')->nullable();
             $table->text('description')->nullable();
+            $table->text('info')->nullable();
             $table->integer('stock')->nullable();
 
             $table->timestamps();

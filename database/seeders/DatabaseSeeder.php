@@ -9,9 +9,11 @@ use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Variant;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Models\ProductPhoto;
 use Illuminate\Database\Seeder;
 use Database\Factories\IconFactory;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,21 +30,26 @@ class DatabaseSeeder extends Seeder
             dd('Gagal menyisipkan data: ', $e->getMessage());
         }
 
-        
+        User::factory(5)->create();
+
         $products = Product::factory(200)->recycle([
             Category::factory(15)->create(),
             Brand::factory(30)->create()
         ])->create();
 
         // Gunakan produk yang sudah dibuat untuk Variant dan ProductPhoto
-        $variants = Variant::factory(500)->create([
-            'product_id' => $products->random()->id,
-        ]);
+        foreach ($products as $product) {
+            Variant::factory(2)->create([
+                'product_id' => $product->id,
+            ]);
+        }
 
         // Gunakan variant yang sudah dibuat untuk ProductPhoto
-        ProductPhoto::factory(600)->create([
-            'product_id' => $products->random()->id,
-        ]);
+        foreach ($products as $product) {
+            ProductPhoto::factory(3)->create([
+                'product_id' => $product->id,
+            ]);
+        }
 
 
 

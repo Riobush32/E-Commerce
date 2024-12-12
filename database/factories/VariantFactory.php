@@ -18,6 +18,7 @@ class VariantFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => fake()->word(),
             'product_id' => Product::factory(),
             'weight' => fake()->randomFloat(2, 0.5, 100),
             'stock' => fake()->numberBetween(0,100)

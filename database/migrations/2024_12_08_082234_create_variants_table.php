@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             //foreign key variant
             $table->foreignId('product_id')->constrained(
                 table: 'products',

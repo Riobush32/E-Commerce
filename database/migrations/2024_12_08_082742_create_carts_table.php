@@ -13,18 +13,19 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            //foreign key user 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
+            //foreign key user
+            $table->foreignId('user_id')->constrained(
+                table: 'users',
+                indexName: 'user_cart_id'
+            );
             //foreign key variant
-            $table->unsignedBigInteger('variant_id');
-            $table->foreign('variant_id')
-                ->references('id')
-                ->on('variants');
+            $table->foreignId('variant_id')->constrained(
+                table: 'variants',
+                indexName: 'variant_cart_id'
+            );
             ////////////////////////////////
             $table->integer('quantity');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

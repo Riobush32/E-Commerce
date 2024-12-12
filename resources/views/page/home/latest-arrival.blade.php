@@ -7,5 +7,7 @@
             <button class="btn btn-ghost">See All Product</button>
         </div>
     </div>
-    <x-component-product></x-component-product>
+    
+
+<livewire:product-show />
 </div>

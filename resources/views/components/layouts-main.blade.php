@@ -8,16 +8,18 @@
   <link rel="stylesheet" href="{{asset('icons/css/all.min.css')}}">
   {{-- alpine  --}}
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  @livewireStyles
 </head>
 <body class="font-body scrollbar scrollbar-thumb-primary">
-  <div class="fixed z-10 bg-white top-0 w-full">
+  <div class="fixed z-50 bg-white top-0 w-full">
     <x-component-topbar></x-component-topbar>
-    <x-component-navbar-user></x-component-navbar-user>
+    <livewire:component-navbar-search />
   </div>
-  
+
   <div class="px-16 mt-2 pt-24 ">
     {{$slot}}
   </div>
   <x-component-footer></x-component-footer>
+  @livewireScripts
 </body>
 </html>
