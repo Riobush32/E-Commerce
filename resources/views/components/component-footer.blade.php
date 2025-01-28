@@ -1,5 +1,5 @@
-<div class="">
-    <footer class=" footer mt-20 bg-base-200 text-base-content p-10">
+<div class="relative z-50">
+    <footer class="z-50 footer mt-20 bg-base-200 text-base-content p-10">
         <aside>
           <svg
             width="50"

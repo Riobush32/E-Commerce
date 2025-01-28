@@ -2,22 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Variant;
-use App\Models\Shipping;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Cart extends Model
+class Shipping extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function variant(): BelongsTo{
-        return $this->belongsTo(Variant::class);
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class);
     }
-
-
-
 }

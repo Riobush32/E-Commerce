@@ -82,7 +82,7 @@
                         src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                         alt="Bonnie image" />
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                    <a href="{{ route('shippingAddress') }}" class="cursor-pointer text-sm text-gray-500 dark:text-gray-400">Shipping Address</a>
                     <div class="mt-2">
                         <a href="{{ route('logout') }} "
                             class="btn btn-ghost text-rose-300 border border-rose-400 hover:text-red-500 font-light tracking-widest"
