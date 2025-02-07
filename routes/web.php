@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\RajaOngkirController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', [ProductController::class,'index'])->name('home');
 Route::get('/detail-product/{id}', [ProductController::class,'productDetails'])->name('productDetails');
@@ -22,7 +24,11 @@ Route::patch('/user-address/update',[ShippingController::class, 'update'])->name
 
 //check ongkir
 Route::get('cek-ongkir/{cart_id}', [RajaOngkirController::class, 'index'])->name('shipping');
+Route::get('payment/{id}', [PaymentController::class, 'index'])->name('payment');
+Route::get('/checkout/succses/{id}', [PaymentController::class, 'checkoutSuccess'])->name('checkoutSuccses');
 
+
+Route::get('/transaction', [TransactionController::class, 'index'])->name('transactionList');
 Route::get('/detail-product', function () {
     return view('page.detailProduct.index');
 });
@@ -31,6 +37,3 @@ Route::get('/detail-product', function () {
 Route::get('/dashboard', function () {
     return view('page.admin.dashboard.index');
 });
-
-
-

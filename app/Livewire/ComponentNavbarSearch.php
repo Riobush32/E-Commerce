@@ -14,7 +14,7 @@ class ComponentNavbarSearch extends Component
         $categories = Category::latest()->get();
         if (Auth::check()) {
             $user_id = Auth::user()->id;
-            $cart = Cart::where('user_id', $user_id)->get()->count();
+            $cart = Cart::where('user_id', $user_id)->where('status', 'cart')->get()->count();
             return view('livewire.component-navbar-search', [
                 'categories' => $categories,
                 'cart' => $cart,

@@ -23,6 +23,7 @@ return new class extends Migration
                 table: 'variants',
                 indexName: 'variant_cart_id'
             );
+            $table->string('status')->default('cart');
             ////////////////////////////////
             $table->integer('quantity');
             $table->text('notes')->nullable();

@@ -82,16 +82,17 @@
                         src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                         alt="Bonnie image" />
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</h5>
-                    <a href="{{ route('shippingAddress') }}" class="cursor-pointer text-sm text-gray-500 dark:text-gray-400">Shipping Address</a>
-                    <div class="mt-2">
-                        <a href="{{ route('logout') }} "
-                            class="btn btn-ghost text-rose-300 border border-rose-400 hover:text-red-500 font-light tracking-widest"
+                    <ul class="menu bg-transparent text-white rounded-box w-56">
+                        <li class="hover:bg-slate-600 rounded-lg"> <a href="{{ route('shippingAddress') }}" >Shipping Address</a></li>
+                        <li  class="hover:bg-slate-600 rounded-lg"><a href="{{ route('transactionList') }}" >Transactions</a></li>
+                        <li class="hover:bg-slate-600 rounded-lg"><a href="{{ route('logout') }} "
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             logout</a>
-                        <form action="{{ route('logout') }}" method="POST" id="logout-form">
-                            @csrf
-                        </form>
-                    </div>
+                        </li>
+                      </ul>
+                      <form class="invisible" action="{{ route('logout') }}" method="POST" id="logout-form">
+                        @csrf
+                    </form>
                 </div>
             </div>
 

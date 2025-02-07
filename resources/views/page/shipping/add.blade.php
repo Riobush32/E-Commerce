@@ -2,7 +2,7 @@
     <x-flash-message></x-flash-message>
 
 
-    <div class="flex justify-center items-center min-h-screen bg-orange-50">
+    <div class="flex justify-center items-center min-h-screen bg-orange-50 py-5">
         <form action="{{ route('storeShippingAddress') }}" method="POST"
             class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
             @csrf

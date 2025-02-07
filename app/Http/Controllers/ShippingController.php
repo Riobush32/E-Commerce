@@ -52,7 +52,7 @@ class ShippingController extends Controller
             'address' =>  $request->address,
         ]);
 
-        return redirect()->back()->with(['success' => 'berhasil membuat shipping address']);
+        return redirect('/user-address')->with(['success' => 'berhasil membuat shipping address']);
     }
 
     public function edit($id){

@@ -16,7 +16,7 @@ class CartCarts extends Component
     public function cartUpdate()
     {
         $user_id = Auth::user()->id;
-        $this->carts = Cart::where('user_id', $user_id)->get();
+        $this->carts = Cart::where('user_id', $user_id)->where('status', 'cart')->get();
     }
     public $carts;
     public $selectedItems = [];
@@ -28,7 +28,11 @@ class CartCarts extends Component
     public function mount()
     {
         $user_id = Auth::user()->id;
-        $this->carts = Cart::where('user_id', $user_id)->get();
+        $this->carts = Cart::where('user_id', $user_id)->where('status', 'cart')->get();
+    }
+
+    public function updateSelection(){
+        $this->dispatch('updateSelection', selectedItems:$this->selectedItems);
     }
 
 
@@ -38,16 +42,6 @@ class CartCarts extends Component
         $this->shippment_service = $shippment_service;
         $this->shippment_estimation = $shippment_estimation;
 
-    }
-
-    public function getSubtotalProperty()
-    {
-        return $this->carts
-            ->where('user_id', Auth::user()->id)
-            ->whereIn('id', $this->selectedItems)
-            ->sum(function($cart) {
-                return $cart->variant->product->price * $cart->quantity;
-            });
     }
 
     public function render()

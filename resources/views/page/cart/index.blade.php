@@ -1,3 +1,6 @@
 <x-layouts-main>
-    <livewire:cart-carts />
+    <div class="min-h-[80vh]">
+        <livewire:cart-carts />
+    </div>
+
 </x-layouts-main>
