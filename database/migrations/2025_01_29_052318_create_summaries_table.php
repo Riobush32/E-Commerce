@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained(
                 table: 'users',
                 indexName: 'summary_user_id'
-            );
+            )->onDelete('cascade');
             $table->foreignId('shipping_id')->constrained(
                 table: 'shippings',
                 indexName: 'summary_shipping_id'
-            );
+            )->onDelete('cascade');
             $table->double('shipping_cost');
             $table->double('discount')->nullable();
             $table->double('subtotal');

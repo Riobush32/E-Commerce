@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc04c738637552a5025411e672eeeceb",
+    "content-hash": "a574d30dd250606f8184d94fd3d85a69",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -238,6 +238,75 @@
                 "source": "https://github.com/DASPRiD/Enum/tree/1.0.6"
             },
             "time": "2024-08-09T14:30:48+00:00"
+        },
+        {
+            "name": "dasundev/livewire-dropzone",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dasundev/livewire-dropzone.git",
+                "reference": "996acb19b6c151bc254079a25a956a6b86063be2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dasundev/livewire-dropzone/zipball/996acb19b6c151bc254079a25a956a6b86063be2",
+                "reference": "996acb19b6c151bc254079a25a956a6b86063be2",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "^3.5",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9",
+                "laravel/pint": "^1.16",
+                "orchestra/testbench": "^8.23",
+                "pestphp/pest": "^1.23"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "LivewireDropzone": "Dasundev\\LivewireDropzone\\LivewireDropzoneFacade"
+                    },
+                    "providers": [
+                        "Dasundev\\LivewireDropzone\\LivewireDropzoneServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dasundev\\LivewireDropzone\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dasun Tharanga",
+                    "email": "hello@dasun.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Livewire Dropzone component for simple drag-and-drop file uploads.",
+            "keywords": [
+                "dropzone",
+                "livewire"
+            ],
+            "support": {
+                "issues": "https://github.com/dasundev/livewire-dropzone/issues",
+                "source": "https://github.com/dasundev/livewire-dropzone/tree/v2.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/dasundev",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-11-23T04:57:05+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -3537,6 +3606,66 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.19.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "1c9c30ac6a6576b8d15c6c37b6cf23d748df2faa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/1c9c30ac6a6576b8d15c6c37b6cf23d748df2faa",
+                "reference": "1c9c30ac6a6576b8d15c6c37b6cf23d748df2faa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0|^11.0|^12.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.23|^2.1|^3.1",
+                "phpunit/phpunit": "^9.5.24|^10.5|^11.5",
+                "spatie/pest-plugin-test-time": "^1.1|^2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.19.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-06T14:58:20+00:00"
         },
         {
             "name": "symfony/clock",

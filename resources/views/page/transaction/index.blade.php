@@ -2,7 +2,7 @@
     <x-flash-message></x-flash-message>
     @foreach ($transactions as $order_number => $orders)
         <div class="overflow-x-auto mt-3">
-            <h3 class="text-primary">Order Number: {{ $order_number }} </h3>
+            <h3 class="text-primary">Order Number: {{ $order_number }}</h3>
             <table class="table">
                 <thead>
                     <tr>
@@ -21,7 +21,7 @@
                     @endphp
                     @foreach ($orders as $transaction)
                         <tr>
-                            <th>{{ $transaction->cart->variant->product->name }}</th>
+                            <th><a href="{{ route('productDetails', ['id' => $transaction->cart->variant->product->id]) }}">{{ $transaction->cart->variant->product->name }}</a></th>
                             <td>{{ $transaction->cart->quantity }}</td>
                             <td>
                                 Rp {{ number_format($transaction->cart->variant->product->price,2,',','.')  }}

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained(
                 table: 'users',
                 indexName: 'shipping_user_id'
-            );
+            )->onDelete('cascade');
             $table->string('no_hp');
             $table->string('province');
             $table->string('province_id');

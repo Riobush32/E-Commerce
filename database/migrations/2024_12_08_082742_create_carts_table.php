@@ -17,12 +17,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained(
                 table: 'users',
                 indexName: 'user_cart_id'
-            );
+            )->onDelete('cascade');
             //foreign key variant
             $table->foreignId('variant_id')->constrained(
                 table: 'variants',
                 indexName: 'variant_cart_id'
-            );
+            )->onDelete('cascade');
             $table->string('status')->default('cart');
             ////////////////////////////////
             $table->integer('quantity');

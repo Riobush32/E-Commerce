@@ -49,7 +49,7 @@ class ProductController extends Controller
                 return redirect()->back()->with(['error' => 'ada kesalahan tidak dapat menambahkan data']);
             }
         }
-
-
     }
+
+
 }

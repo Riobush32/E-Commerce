@@ -18,9 +18,10 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained(
                 table: 'products',
                 indexName: 'product_variant_id'
-            );
+            )->onDelete('cascade');
+            $table->string('variant_image')->nullable();
             $table->double('weight');
-            $table->double('stock');
+            $table->double('stock')->nullable();
             $table->timestamps();
         });
     }

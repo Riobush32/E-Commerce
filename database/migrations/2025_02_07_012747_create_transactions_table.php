@@ -17,15 +17,15 @@ return new class extends Migration
             $table->foreignId(column: 'user_id')->constrained(
                 table: 'users',
                 indexName: 'transaction_user_id'
-            );
+            )->onDelete('cascade');
             $table->foreignId(column: 'summary_id')->constrained(
                 table: 'summaries',
                 indexName: 'transaction_summary_id'
-            );
+            )->onDelete('cascade');
             $table->foreignId(column: 'cart_id')->constrained(
                 table: 'carts',
                 indexName: 'transaction_cart_id'
-            );
+            )->onDelete('cascade');
             $table->string('status')->nullable();
             $table->timestamps();
         });

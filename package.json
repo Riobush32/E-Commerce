@@ -16,6 +16,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@dasundev/livewire-dropzone-styles": "^2.0.2",
         "tailwind-scrollbar": "^3.1.0"
     }
 }

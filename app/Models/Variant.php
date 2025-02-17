@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\VariantPhotos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,5 +21,9 @@ class Variant extends Model
 
     public function carts(): HasMany {
         return $this->hasMany(Cart::class);
+    }
+
+    public function variant_photos(): HasMany {
+        return $this->hasMany(VariantPhotos::class);
     }
 }

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_photos', function (Blueprint $table) {
+        Schema::create('variant_photos', function (Blueprint $table) {
             $table->id();
             //foreign key product
-            $table->foreignId('product_id')->constrained(
-                table: 'products',
-                indexName: 'product_photo_id',
-            )->onDelete('cascade');
+            $table->foreignId('variant_id')->constrained(
+                table: 'variants',
+                indexName: 'variant_photo_id'
+            );
             ////////////////////////////////
             $table->string('photo_patch');
             $table->timestamps();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_photos');
+        Schema::dropIfExists('variant_photos');
     }
 };

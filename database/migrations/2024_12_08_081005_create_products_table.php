@@ -16,14 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->double('price');
             //foreing key
-            $table->foreignId('category_id')->constrained(
+            $table->foreignId('category_id')->nullable()->constrained(
                 table: 'categories',
                 indexName: 'product_category_id'
-            );
-            $table->foreignId('brand_id')->constrained(
+            )->onDelete('set null');
+            $table->foreignId('brand_id')->nullable()->constrained(
                 table: 'brands',
                 indexName: 'product_brand_id'
-            );
+            )->onDelete('set null');
             ////////////////////////////////////
             $table->double('rating')->nullable();
             $table->double('sold')->nullable();

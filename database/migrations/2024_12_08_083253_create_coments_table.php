@@ -17,13 +17,13 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')->onDelete('cascade');
             // foreign key pproducts
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')
                 ->references('id')
-                ->on('products');
-            
+                ->on('products')->onDelete('cascade');
+
             ////////////////////////
             $table->double('rating')->nullable();
             $table->text('coment');

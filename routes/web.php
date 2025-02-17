@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\RajaOngkirController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\BackendProductController;
 
 Route::get('/', [ProductController::class,'index'])->name('home');
 Route::get('/detail-product/{id}', [ProductController::class,'productDetails'])->name('productDetails');
@@ -37,3 +38,9 @@ Route::get('/detail-product', function () {
 Route::get('/dashboard', function () {
     return view('page.admin.dashboard.index');
 });
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Back End
+Route::get('/backend/product-list', [BackendProductController::class, 'index'])->name('backendProductList');
+Route::get('/backend/product-list/add', [BackendProductController::class, 'add'])->name('backendProductList');
