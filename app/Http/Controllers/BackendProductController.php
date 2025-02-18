@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class BackendProductController extends Controller
 {
     public function index(){
-        return view('backend.product.index', ['active' => true]);
+        return view('backend.product.index', ['active' => 'product']);
     }
 }

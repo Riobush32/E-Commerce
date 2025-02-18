@@ -33,7 +33,7 @@
                     <tbody>
                         <!-- row 1 -->
                         @foreach ($products as $product)
-                            <tr>
+                            <tr wire:key="product-{{ $product->id }}">
                                 <td>
                                     <div class="flex items-center gap-3">
                                         <div class="avatar">

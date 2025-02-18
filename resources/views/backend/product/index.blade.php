@@ -1,4 +1,5 @@
 <x-layouts-backend>
+    <x-slot:active>{{ $active }}</x-slot:active>
     <div x-data="{ formAddProduct: false, showDetailProduct: false }" class="">
         @include('backend.components.breadcrumbs')
 
@@ -7,7 +8,7 @@
             @livewire('backend.product.add-product')
         </div>
         @livewire('backend.product.detail-product')
-        {{-- @livewire('backend.product.edit-product') --}}
+
     </div>
     <script>
         document.addEventListener('livewire:init', () => {
