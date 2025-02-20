@@ -1,4 +1,4 @@
-<div x-data="{ avatar: false }"  @click.outside="if(avatar) avatar = false">
+<div x-data="{ avatar: false }" @click.outside="if(avatar) avatar = false">
     {{-- vinta manullang  --}}
     <div class="w-full flex items-center justify-arund gap-2 px-16 py-2">
         <a href="{{ route('home') }}" class="font-logo font-bold text-xl w-1/6 flex items-center text">
@@ -8,7 +8,8 @@
             <div class="join">
                 <div>
                     <div>
-                        <input class="w-[33vw] input input-sm input-bordered join-item" placeholder="Search" />
+                        <input wire:model.live="search" class="w-[33vw] input input-sm input-bordered join-item"
+                            placeholder="Search" />
                     </div>
                 </div>
                 <select class="select select-sm select-bordered join-item gruop">
@@ -68,10 +69,9 @@
     @guest
     @else
         <div class="mt-2 absolute z-[999] right-24 max-h-[50vh] overflow-auto rounded-xl" x-show="avatar"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-90" >
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
 
 
             <div
@@ -83,14 +83,16 @@
                         alt="Bonnie image" />
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</h5>
                     <ul class="menu bg-transparent text-white rounded-box w-56">
-                        <li class="hover:bg-slate-600 rounded-lg"> <a href="{{ route('shippingAddress') }}" >Shipping Address</a></li>
-                        <li  class="hover:bg-slate-600 rounded-lg"><a href="{{ route('transactionList') }}" >Transactions</a></li>
-                        <li class="hover:bg-slate-600 rounded-lg"><a href="{{ route('logout') }} "
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            logout</a>
+                        <li class="hover:bg-slate-600 rounded-lg"> <a href="{{ route('shippingAddress') }}">Shipping
+                                Address</a></li>
+                        <li class="hover:bg-slate-600 rounded-lg"><a href="{{ route('transactionList') }}">Transactions</a>
                         </li>
-                      </ul>
-                      <form class="invisible" action="{{ route('logout') }}" method="POST" id="logout-form">
+                        <li class="hover:bg-slate-600 rounded-lg"><a href="{{ route('logout') }} "
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                logout</a>
+                        </li>
+                    </ul>
+                    <form class="invisible" action="{{ route('logout') }}" method="POST" id="logout-form">
                         @csrf
                     </form>
                 </div>
@@ -99,5 +101,24 @@
         </div>
     @endguest
 
-
+    {{-- ////////////////////////////////////////////// search Feedback /////////////////////////////////// --}}
+    @if ($search != '')
+        <div class="fixed w-full flex justify-center items-center ">
+            <div class="flex max-h-[65vh] overflow-auto gap-4 flex-wrap max-w-[900px] mt-3 rounded-xl p-4 bg-slate-50 shadow-xl border">
+                @foreach ($products as $product)
+                    <a href="{{ route('productDetails', ['id' => $product->id]) }}" class="flex gap-2 cursor-pointer items-center border shadow-lg hover:shadow-black duration-300 ease-in-out rounded-xl p-3">
+                        <div class="avatar">
+                            <div class="mask rounded-xl w-16">
+                                <img src="{{ asset($product->product_photos->first()->photo_patch) }}" />
+                            </div>
+                        </div>
+                        <div class="">
+                            <h1 class="font-semibold">{{ $product->name }}</h1>
+                            <h3 class=font-light>Rp {{ number_format($product->price) }}</h3>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    @endif
 </div>

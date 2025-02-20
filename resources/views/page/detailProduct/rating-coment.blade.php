@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
-        
+
         <i class="text-sm fa-solid fa-star text-amber-500"></i>
         <i class="text-sm fa-solid fa-star text-amber-500"></i>
         <i class="text-sm fa-solid fa-star text-amber-500"></i>
@@ -25,7 +25,7 @@
             identical strap from another Invicta and went in the shower with it to test the waterproofing.... No
             problems.</p>
     </div>
-    
+
     <a @click="readMore = !readMore" @click.outside="readMore = false" x-text="readMore ? 'See less...':'Read more...'" class="cursor-pointer block mb-5 text-sm font-medium text-blue-600 hover:underline "></a>
     <aside>
         <p class="mt-1 text-xs text-gray-500 ">19 people found this helpful</p>

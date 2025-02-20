@@ -19,11 +19,11 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained(
                 table: 'categories',
                 indexName: 'product_category_id'
-            )->onDelete('set null');
+            )->onDelete('cascade');
             $table->foreignId('brand_id')->nullable()->constrained(
                 table: 'brands',
                 indexName: 'product_brand_id'
-            )->onDelete('set null');
+            )->onDelete('cascade');
             ////////////////////////////////////
             $table->double('rating')->nullable();
             $table->double('sold')->nullable();

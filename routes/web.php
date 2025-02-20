@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\BackendBrandController;
 use App\Http\Controllers\BackendProductController;
 use App\Http\Controllers\BackendCategoryController;
+use App\Http\Controllers\BackendTransactionController;
 
 Route::get('/', [ProductController::class,'index'])->name('home');
 Route::get('/detail-product/{id}', [ProductController::class,'productDetails'])->name('productDetails');
@@ -36,6 +39,9 @@ Route::get('/detail-product', function () {
     return view('page.detailProduct.index');
 });
 
+// Chat
+Route::get('/chat/{id}', [ChatController::class, 'index'])->name('chat');
+
 
 Route::get('/dashboard', function () {
     return view('page.admin.dashboard.index');
@@ -44,6 +50,8 @@ Route::get('/dashboard', function () {
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Back End
+// Route::get('/backend/product', [BackendProductController::class, 'index'])->name('backendProduct')->middleware([IsAdmin::class]);
 Route::get('/backend/product', [BackendProductController::class, 'index'])->name('backendProduct');
 Route::get('/backend/brand/', [BackendBrandController::class, 'index'])->name('backendBrand');
 Route::get('/backend/category/', [BackendCategoryController::class, 'index'])->name('backendCategory');
+Route::get('backend/transaction/', [BackendTransactionController::class, 'index'])->name('backendTransaction');

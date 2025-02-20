@@ -5,7 +5,7 @@
     <div class="flex">
         @include('page.detailProduct.image')
         @include('page.detailProduct.detail')
-        @include('page.detailProduct.add-cart')
+        @livewire('set-order', ['id' => $product->id])
 
 
     </div>

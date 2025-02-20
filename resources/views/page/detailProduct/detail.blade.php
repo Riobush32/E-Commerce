@@ -34,26 +34,11 @@
         <hr>
         {{-- description  --}}
         <div class="px-2 py3 mt-5" x-show="description">
-            {{-- <p class="">Nama Produk: Kemeja Formal Pria Slim Fit</p>
-            <p>Deskripsi:</p>
-            <p>Tampil elegan dan percaya diri dengan kemeja formal slim fit yang dirancang untuk memberikan kenyamanan
-                maksimal. Dibuat dari bahan katun premium yang lembut, breathable, dan mudah dirawat. Cocok untuk acara
-                formal, kerja, atau pertemuan penting. Tersedia dalam berbagai warna klasik seperti putih, hitam, dan navy.</p>
-            <p>Spesifikasi:</p>
-            <p>Material: 100% Katun Premium</p>
-            <p>Model: Slim Fit dengan kancing tersembunyi</p>
-            <p>Ukuran: S, M, L, XL</p> --}}
-            <p>{{ $product->description }}</p>
-
+            {!! $product->description !!}
         </div>
         {{-- info  --}}
         <div class="px-2 py3 mt-5" x-show="info">
-            {{-- <p>Spesifikasi:</p>
-            <p>Material: 100% Katun Premium</p>
-            <p>Model: Slim Fit dengan kancing tersembunyi</p>
-            <p>Ukuran: S, M, L, XL</p> --}}
-            <p>{{ $product->info }}</p>
-
+            {!! $product->info !!}
         </div>
     </div>
 </div>

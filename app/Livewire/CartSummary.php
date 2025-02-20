@@ -111,10 +111,13 @@ class CartSummary extends Component
             ])->post('https://api.rajaongkir.com/starter/cost', [
                 'origin' => 15,
                 'destination' => $shippingAddress->city_id,
-                'weight' => $this->weight * 100,
+                'weight' => number_format($this->weight * 1000,2),
                 'courier' => 'jne',
             ]);
+            // dd($this->shippingAddress->city_id);
             if ($response->successful()) {
+                // dd('berhasil');
+
                 $this->ongkir = $response['rajaongkir']['results'];
                 $this->isShippingAddress = true;
                 $this->check_ongkir = true;
@@ -124,12 +127,14 @@ class CartSummary extends Component
                         $this->estimation = $cost['cost'][0]['etd'];
                         break;
                     }
+
                 }
                 $this->payment = $this->subtotal + $this->discount + $this->shippingCost;
             } else {
+                // dd('gagal');
                 $this->ongkir = ['name' => 'tidak ditemukan'];
-                $this->isShippingAddress = true;
-                $this->check_ongkir = true;
+                $this->isShippingAddress = false;
+                $this->check_ongkir = false;
             }
             $this->check_ongkir = true;
         } else {

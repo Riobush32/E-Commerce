@@ -9,7 +9,7 @@
 
             <div class="h-80 overflow-hidden ">
                 @if ($product->product_photos->isNotEmpty())
-                    <img src="{{ $product->product_photos->first()->photo_patch }}" alt="{{ $product->name }}">
+                    <img class="w-full" src="{{ asset($product->product_photos->first()->photo_patch) }}" alt="{{ $product->name }}">
                 @else
                     <img src="{{ asset('img/bajuPria/gambar1.png') }}" alt="{{ $product->name }}">
                 @endif

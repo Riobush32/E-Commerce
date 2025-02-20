@@ -8,4 +8,7 @@
     <div  class="tooltip group" data-tip="Category">
         <a href="{{ route('backendCategory') }}" class="{{ $active == 'category' ? 'btn-md bg-rose-500':'group-hover:btn-md group-hover:bg-rose-500 '}} btn btn-sm  glass  bg-gray-400 transition-all ease-in-out duration-300"><i class="{{ $active == 'category' ? 'text-gray-50 text-xl': 'group-hover:text-gray-50 group-hover:text-xl ' }} fa-solid fa-icons  text-gray-300  text-md  transition-all ease-in-out duration-300"></i></a>
     </div>
+    <div  class="tooltip group" data-tip="Transaction">
+        <a href="{{ route('backendTransaction') }}" class="{{ $active == 'transaction' ? 'btn-md bg-cyan-500':'group-hover:btn-md group-hover:bg-cyan-500 '}} btn btn-sm  glass  bg-gray-400 transition-all ease-in-out duration-300"><i class="{{ $active == 'trannsaction' ? 'text-gray-50 text-xl': 'group-hover:text-gray-50 group-hover:text-xl ' }} fa-solid fa-money-check-dollar  text-gray-300  text-md  transition-all ease-in-out duration-300"></i></a>
+    </div>
 </div>
