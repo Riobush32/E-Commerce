@@ -110,6 +110,7 @@ class DetailProduct extends Component
             $variant->update([
                 'stock' => $stok - 1,
             ]);
+            $this->allStok();
         }
     }
     public function incrementVariantStok($id)
@@ -118,6 +119,14 @@ class DetailProduct extends Component
         $stok = $variant->stock;
         $variant->update([
             'stock' => $stok + 1,
+        ]);
+        $this->allStok();
+    }
+    public function allStok(){
+        $variants = Variant::where('product_id', $this->idProduct)->get();
+        $stokAll = $variants->sum('stock');
+        Product::find($this->idProduct)->update([
+            'stock' => $stokAll
         ]);
     }
     public function deleteVariant($id)

@@ -68,7 +68,7 @@
                                     @foreach ($product->variants as $variant)
                                     <div class="">
                                         <span class="text-primary">{{ $variant->name }}</span> :
-                                        {{ $variant->stok != 0 || $variant->stok != null ? $variant->stok : 'kosong' }}
+                                        {{ $variant->stock != 0 || $variant->stock != null ? $variant->stock : 'kosong' }}
                                     </div>
 
                                     @endforeach
@@ -90,10 +90,9 @@
                     <!-- foot -->
                     <tfoot>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Name & Price</th>
+                            <th>Category & Brand</th>
+                            <th>Stok</th>
                             <th></th>
                         </tr>
                     </tfoot>

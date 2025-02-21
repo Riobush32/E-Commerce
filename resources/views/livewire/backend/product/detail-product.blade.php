@@ -121,7 +121,7 @@
                                     Stok
                                 </div>
                                 <div class="">
-                                    {{ $productDetailData->variants->sum('stok') }}
+                                    {{ $productDetailData->variants->sum('stock') }}
                                 </div>
                             </div>
                             <hr class="border border-slate-300">

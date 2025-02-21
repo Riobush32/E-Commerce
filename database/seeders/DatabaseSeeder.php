@@ -30,7 +30,14 @@ class DatabaseSeeder extends Seeder
             dd('Gagal menyisipkan data: ', $e->getMessage());
         }
 
-        // User::factory(5)->create();
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
+        ]);
+
+        User::factory(5)->create();
 
         // $products = Product::factory(200)->recycle([
         //     Category::factory(15)->create(),

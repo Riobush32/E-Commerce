@@ -43,12 +43,17 @@
                     <i class="fa-solid fa-bookmark"></i>
                 </button>
             </div>
+
             @guest
                 <a href="{{ route('login') }}"
                     class="btn btn-sm btn-primary text-white tracking-widest font-light">Login</a>
                 <a href="{{ route('register') }}"
                     class="btn btn-sm btn-outline btn-primary text-white  tracking-widest font-light">register</a>
             @else
+                @if (Auth::user()->role == 'admin')
+                    <a href="{{ route('backendProduct') }}"
+                        class="btn btn-sm btn-primary text-white tracking-widest font-light">Dashboard</a>
+                @endif
                 {{-- user  --}}
                 <div class="avatar mr-3 group" @click="avatar = true">
                     <div @click="avatar = true"
@@ -101,9 +106,11 @@
     {{-- ////////////////////////////////////////////// search Feedback /////////////////////////////////// --}}
     @if ($search != '')
         <div class="fixed w-full flex justify-center items-center ">
-            <div class="flex max-h-[65vh] overflow-auto gap-4 flex-wrap max-w-[900px] mt-3 rounded-xl p-4 bg-slate-50 shadow-xl border">
+            <div
+                class="flex max-h-[65vh] overflow-auto gap-4 flex-wrap max-w-[900px] mt-3 rounded-xl p-4 bg-slate-50 shadow-xl border">
                 @foreach ($products as $product)
-                    <a href="{{ route('productDetails', ['id' => $product->id]) }}" class="flex gap-2 cursor-pointer items-center border shadow-lg hover:shadow-black duration-300 ease-in-out rounded-xl p-3">
+                    <a href="{{ route('productDetails', ['id' => $product->id]) }}"
+                        class="flex gap-2 cursor-pointer items-center border shadow-lg hover:shadow-black duration-300 ease-in-out rounded-xl p-3">
                         <div class="avatar">
                             <div class="mask rounded-xl w-16">
                                 <img src="{{ asset($product->product_photos->first()->photo_patch) }}" />

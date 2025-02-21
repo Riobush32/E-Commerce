@@ -40,7 +40,7 @@ Route::get('/detail-product', function () {
 });
 
 // Chat
-Route::get('/chat/{id}', [ChatController::class, 'index'])->name('chat');
+Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 
 
 Route::get('/dashboard', function () {
