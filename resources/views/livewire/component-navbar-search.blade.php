@@ -26,9 +26,6 @@
         </div>
         <div class="w-2/6 flex items-center gap-5 justify-end">
 
-            <a class="link link-hover">Blog</a>
-            <a class="link link-hover">About</a>
-            <span class="text-primary">|</span>
             <div class="flex items-center">
 
                 <div class="indicator mr-5">
