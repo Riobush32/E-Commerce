@@ -29,46 +29,96 @@
                     <thead>
                         <tr>
                             <th>Order Number</th>
+                            <th>Product</th>
+                            <th>Customer</th>
                             <th>Date</th>
-                            <th>Status</th>
+                            <th>Total</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- row 1 -->
-                        {{-- @foreach ($transactions as $order_number => $orders) --}}
-                        @foreach ($transactions as $transaction)
 
-                            <tr >
-                                <td>{{ $transaction->order_number }}</td>
-                                <td>{{ $transaction->created_at  }}</td>
-                                <td>{{ $transaction->status  }}</td>
-
+                        @foreach ($orders as $orderNumber => $transactionsByOrder)
+                            <tr>
+                                <td>{{ $orderNumber }}</td>
                                 <td>
-                                    <button
-                                        wire:click="$dispatch('toggleShowEdittransaction', { id: {{ $transaction->id }} })"
-                                        class="btn btn-outline btn-info btn-xs">
-                                        <i class="fa-solid fa-pen-to-square"></i> edit
-                                    </button>
-                                    <button wire:click="deletetransaction({{ $transaction->id }})"
-                                        class="btn btn-outline btn-error btn-xs">
-                                        <i class="fa-solid fa-trash"></i> delete
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                        {{-- @endforeach --}}
+                                    @foreach ($transactionsByOrder as $transaction)
+                                        @if ($transaction['status'] == '1')
+                                            <button
+                                                wire:click="$dispatch('toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
+                                                class="btn btn-outline btn-info btn-xs">
+                                                Pesanan Diproses
+                                            </button>
+                                        @elseif($transaction['status'] == '2')
+                                            <button
+                                                wire:click="$dispatchTo('ChangeStatus', 'toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
+                                                class="btn btn-outline btn-info btn-xs">
+                                                Pesanan DiPacking
+                                            </button>
+                                        @elseif($transaction['status'] == '3')
+                                            <button
+                                                wire:click="$dispatch('toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
+                                                class="btn btn-outline btn-info btn-xs">
+                                                Pesanan Dikirim
+                                            </button>
+                                        @elseif($transaction['status'] == '4')
+                                            <button
+                                                wire:click="$dispatch('toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
+                                                class="btn btn-outline btn-info btn-xs">
+                                                Pesanan Diterima
+                                            </button>
+                                        @elseif($transaction['status'] == '5')
+                                            <button
+                                                wire:click="$dispatch('toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
+                                                class="btn btn-outline btn-info btn-xs">
+                                                Pesanan Selesai
+                                            </button>
+                                        @endif
+                                        </button>
+                                    @break
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach ($transactionsByOrder as $transaction)
+                                    @php
+                                        $variantId = $transaction['cart']['variant_id'];
+                                        $variant = \App\Models\Variant::find($variantId);
+                                    @endphp
+                                    <div class="flex gap-4 m-2 items-center">
+                                        <div class="">
+                                            <div class="avatar">
+                                                <div class="w-8 rounded">
+                                                    <img src="{{ asset($variant->variant_image) }}"
+                                                        alt="Tailwind-CSS-Avatar-component" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <p>{{ $variant->product->name }}</p>
+                                            <p>Jumlah : <span>{{ $transaction['cart']['quantity'] }}</span></p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </td>
+                            <td>{{ $transaction['user']['name'] }}</td>
+                            <td>{{ \Carbon\Carbon::parse($transaction['summary']['created_at'])->format('d-m-Y H:i:s') }}
+                            </td>
+                            <td>Rp {{ number_format($transaction['summary']['payment']) }}</td>
 
-                    </tbody>
-                </table>
+                        </tr>
+                    @endforeach
+                    {{-- @endforeach --}}
 
-                {{-- <div wire:ignore class="hidden md:flex justify-end mt-4">
+                </tbody>
+            </table>
+
+            {{-- <div wire:ignore class="hidden md:flex justify-end mt-4">
                     {{ $transactions->links('backend.components.pagination') }}
                 </div>
                 <div wire:ignore class="mt-4 md:hidden">
                     {{ $transactions->links('backend.components.simple-pagination') }}
                 </div> --}}
-            </div>
         </div>
     </div>
+</div>
 </div>

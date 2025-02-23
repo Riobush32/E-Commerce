@@ -112,7 +112,7 @@
                     <button class="btn join-item w-1/3 text-red-500">
                         <i class="fa-solid fa-heart"></i>
                     </button>
-                    <a href="{{ route('chat') }}" class="btn join-item w-1/3 text-cyan-600">
+                    <a href="{{ route('chat', $productData->id) }}" class="btn join-item w-1/3 text-cyan-600">
                         <i class="fa-regular fa-comment-dots"></i>
                     </a>
                     <button class="btn join-item w-1/3 text-blue-600">

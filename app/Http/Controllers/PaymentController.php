@@ -29,7 +29,7 @@ class PaymentController extends Controller
                 'user_id' => Auth::user()->id,
                 'summary_id' => $summary->id,
                 'cart_id' => $item,
-                'status' => 'approved',
+                'status' => '1',
             ]);
         }
         return redirect()->route('transactionList');

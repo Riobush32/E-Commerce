@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained(
                 table: 'products',
                 indexName: 'product_chat_id'
-            )->onDelete('cascade');
+            )->onDelete('cascade')->nullable();
             $table->text('message');
             $table->timestamps();
         });
