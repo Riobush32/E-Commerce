@@ -57,3 +57,4 @@ Route::get('/backend/product', [BackendProductController::class, 'index'])->name
 Route::get('/backend/brand/', [BackendBrandController::class, 'index'])->name('backendBrand');
 Route::get('/backend/category/', [BackendCategoryController::class, 'index'])->name('backendCategory');
 Route::get('backend/transaction/', [BackendTransactionController::class, 'index'])->name('backendTransaction');
+Route::post('backend/transaction/print', [BackendTransactionController::class, 'print'])->name('backendTransactionPrint');

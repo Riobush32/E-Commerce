@@ -22,6 +22,18 @@
                     <option value="20">20</option>
                     <option value="25">25</option>
                 </select> --}}
+                <form action="{{ route('backendTransactionPrint') }}" method="post" class="join">
+                    @csrf
+                    <label class="input input-sm input-bordered flex items-center gap-2 join-item">
+                        Dari
+                        <input name="dari" type="date" class="grow" required />
+                    </label>
+                    <label class="input  input-sm input-bordered flex items-center gap-2  join-item">
+                        sampai
+                        <input name="sampai" type="date" class="grow" required />
+                    </label>
+                    <button submit class="btn btn-sm  join-item">create laporan</button>
+                </form>
             </div>
             <div class="overflow-x-auto mt-3">
                 <table class="table">
