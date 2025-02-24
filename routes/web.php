@@ -35,6 +35,8 @@ Route::get('/checkout/succses/{id}', [PaymentController::class, 'checkoutSuccess
 
 
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transactionList');
+Route::post('/transaction/coment/{id}', [TransactionController::class, 'coment'])->name('transactionComent');
+Route::get('/transaction/{order_number}', [TransactionController::class, 'updateStatus'])->name('transactionUpdateStatus');
 Route::get('/detail-product', function () {
     return view('page.detailProduct.index');
 });

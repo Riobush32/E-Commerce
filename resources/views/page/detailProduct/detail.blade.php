@@ -8,12 +8,9 @@
         {{-- rating  --}}
         <div class="text-sm align-midle mt-2">
             <i class="fa-solid fa-star text-amber-500"></i>
-            <span class="text-secondary">4.5 Ratings</span>
+            <span class="text-secondary">{{ $coments->avg('rating') }} Ratings</span>
             <span class="text-secondary">●</span>
-            {{-- reviewer --}}
-            <span class="text-secondary">2.4k Reviewers</span>
-            <span class="text-secondary">●</span>
-            <span class="text-secondary">3k sold</span>
+            <span class="text-secondary">{{ $coments->count() }} sold</span>
         </div>
         <div class="mt-3">
             <h2 class="text-4xl">Rp {{ number_format($product->price, 0, ',', '.') }}</h2>

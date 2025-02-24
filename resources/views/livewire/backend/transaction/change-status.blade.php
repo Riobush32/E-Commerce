@@ -9,7 +9,7 @@
     @if ($showStatus)
     <div class="fixed inset-0 flex items-center justify-center">
         <div class="ralative card bg-base-100 max-w-[800px] shadow-xl">
-            <button wire:click="$set('showEditCategory', false)"
+            <button wire:click="$set('showStatus', false)"
                 class="absolute top-5 right-5 btn btn-circle btn-outline btn-xs">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -18,13 +18,13 @@
                     <h2 class="card-title">Update Status</h2>
                 </div>
 
-                <form wire:submit.prevent="updateCategoryData"
+                <form wire:submit.prevent="changeStatus"
                     class="border-2 border-dashed border-green-600 rounded-xl p-4">
                     <label class="form-control w-full max-w-xs">
                         <div class="label">
                             <span class="label-text">Status {{ $transactionData->status }}</span>
                         </div>
-                        <select class="select select-bordered select-sm w-full max-w-xs">
+                        <select wire:model="status" class="select select-bordered select-sm w-full max-w-xs">
                             <option value="{{ $status }}">
                                 {{ $statusText }}
                             </option>
@@ -32,7 +32,6 @@
                             <option value="2">Pesanan DiPacking</option>
                             <option value="3">Pesanan Dikirim</option>
                             <option Value="4">Pesanan Diterima</option>
-                            <option Value="5">Pesanan Selesai</option>
                         </select>
                     </label>
 

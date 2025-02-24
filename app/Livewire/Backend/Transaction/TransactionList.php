@@ -4,6 +4,7 @@ namespace App\Livewire\Backend\Transaction;
 
 use Livewire\Component;
 use App\Models\Transaction;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -14,6 +15,24 @@ class TransactionList extends Component
     public $search = '',
         $perPage;
 
+
+    #[On('updateStatusPesananSelesai')]
+    public function updateStatusPesananSelesai($order_number){
+        // dd($order_number);
+        $transaction = Transaction::where('order_number', $order_number)->first();
+        if($transaction){
+            $transaction->status = 'Selesai';
+            $transaction->save();
+        }
+    }
+
+    #[On('updateSearchTransactionList')]
+    public function updateSearchTransactionList($order_number) {
+        // dd($order_number);
+        $this->search = $order_number;
+    }
+    #[On('updateTransactionList')]
+    public function updateTransactionList() {}
     public function mount()
     {
         // $this->transactions = Transaction::all();
@@ -30,7 +49,10 @@ class TransactionList extends Component
     public function render()
     {
         // Ambil data transaksi dan kelompokkan berdasarkan order_number
-        $data = Transaction::with(['user', 'cart', 'summary'])->latest()->get()->groupBy('order_number');
+        $data = Transaction::where('order_number','like', '%' . $this->search . '%')->with(['user', 'cart', 'summary'])
+            ->latest()
+            ->get()
+            ->groupBy('order_number');
 
         // Mengonversi Collection ke array
         $data = $data->toArray();

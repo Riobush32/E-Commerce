@@ -1,40 +1,31 @@
-
-<div class="" x-data="{readMore:false}">
+<div class="" x-data="{ readMore: false }">
     <div class=" flex items-center mb-4">
-        <img class="w-10 h-10 me-4 rounded-full" src="{{ asset('img/modelBanner/model1.png') }}" alt="">
+        @if($coment->user->user_image != null)
+        <img src="{{ asset($coment->user->user_image) }}" alt="">
+        @else
+        <img class="w-10 h-10 me-4 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="">
+        @endif
+
         <div class="font-medium ">
-            <p>Jese Leos <time datetime="2014-08-16 19:00" class="block text-sm text-gray-500 ">Joined
-                    on August 2014</time></p>
+            <p>{{ $coment->user->name }} <span class="block text-sm text-gray-500 ">{{ $coment->created_at }}</span></p>
         </div>
     </div>
     <div class="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
 
-        <i class="text-sm fa-solid fa-star text-amber-500"></i>
-        <i class="text-sm fa-solid fa-star text-amber-500"></i>
-        <i class="text-sm fa-solid fa-star text-amber-500"></i>
-        <i class="text-sm fa-solid fa-star text-amber-500"></i>
-        <i class="text-sm fa-solid fa-star"></i>
-        <h3 class="ms-2 text-sm font-semibold text-gray-900 ">Thinking to buy another one!</h3>
+        <div class="rating rating-sm">
+            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" {{ $coment->rating == 1 ? 'checked' : '' }} disabled/>
+            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" {{ $coment->rating == 2 ? 'checked' : '' }} disabled/>
+            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" {{ $coment->rating == 3 ? 'checked' : '' }} disabled/>
+            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" {{ $coment->rating == 4 ? 'checked' : '' }} disabled/>
+            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" {{ $coment->rating == 5 ? 'checked' : '' }} disabled/>
+        </div>
     </div>
-    <footer class="mb-5 text-sm text-gray-500 ">
-        <p>Reviewed in the United Kingdom on <time datetime="2017-03-03 19:00">March 3, 2017</time></p>
-    </footer>
     <div class="">
-        <p class="mb-2 text-gray-500 " :class="!readMore ? 'line-clamp-3' : ''">This is my third Invicta Pro Diver. They are just fantastic
-            value for money. This one arrived yesterday and the first thing I did was set the time, popped on an
-            identical strap from another Invicta and went in the shower with it to test the waterproofing.... No
-            problems.</p>
+        <p class="mb-2 text-gray-500 " :class="!readMore ? 'line-clamp-3' : ''">
+           {{ $coment->coment }}</p>
     </div>
 
-    <a @click="readMore = !readMore" @click.outside="readMore = false" x-text="readMore ? 'See less...':'Read more...'" class="cursor-pointer block mb-5 text-sm font-medium text-blue-600 hover:underline "></a>
-    <aside>
-        <p class="mt-1 text-xs text-gray-500 ">19 people found this helpful</p>
-        <div class="flex items-center mt-3">
-            <a href="#"
-                class="px-2 py-1.5 text-xs font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">Helpful</a>
-            <a href="#"
-                class="ps-4 text-sm font-medium text-blue-600 hover:underline  border-gray-200 ms-4 border-s md:mb-0 ">Report
-                abuse</a>
-        </div>
-    </aside>
+    <a @click="readMore = !readMore" @click.outside="readMore = false" x-text="readMore ? 'See less...':'Read more...'"
+        class="cursor-pointer block mb-5 text-sm font-medium text-blue-600 hover:underline "></a>
+
 </div>

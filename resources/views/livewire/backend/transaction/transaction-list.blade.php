@@ -15,13 +15,13 @@
                 <label class="input input-bordered input-sm flex items-center gap-2">
                     <input wire:model.live="search" type="text" class="grow" placeholder="Search" />
                 </label>
-                <select wire:model.live="perPage" class="select select-bordered select-sm ">
+                {{-- <select wire:model.live="perPage" class="select select-bordered select-sm ">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
-                </select>
+                </select> --}}
             </div>
             <div class="overflow-x-auto mt-3">
                 <table class="table">
@@ -29,6 +29,7 @@
                     <thead>
                         <tr>
                             <th>Order Number</th>
+                            <th>Status</th>
                             <th>Product</th>
                             <th>Customer</th>
                             <th>Date</th>
@@ -43,37 +44,20 @@
                                 <td>{{ $orderNumber }}</td>
                                 <td>
                                     @foreach ($transactionsByOrder as $transaction)
-                                        @if ($transaction['status'] == '1')
-                                            <button
-                                                wire:click="$dispatch('toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
-                                                class="btn btn-outline btn-info btn-xs">
+                                        <button
+                                            wire:click="$dispatch('toogleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
+                                            class="btn btn-outline btn-info btn-xs">
+                                            @if ($transaction['status'] == '1')
                                                 Pesanan Diproses
-                                            </button>
-                                        @elseif($transaction['status'] == '2')
-                                            <button
-                                                wire:click="$dispatchTo('ChangeStatus', 'toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
-                                                class="btn btn-outline btn-info btn-xs">
+                                            @elseif($transaction['status'] == '2')
                                                 Pesanan DiPacking
-                                            </button>
-                                        @elseif($transaction['status'] == '3')
-                                            <button
-                                                wire:click="$dispatch('toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
-                                                class="btn btn-outline btn-info btn-xs">
+                                            @elseif($transaction['status'] == '3')
                                                 Pesanan Dikirim
-                                            </button>
-                                        @elseif($transaction['status'] == '4')
-                                            <button
-                                                wire:click="$dispatch('toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
-                                                class="btn btn-outline btn-info btn-xs">
+                                            @elseif($transaction['status'] == '4')
                                                 Pesanan Diterima
-                                            </button>
-                                        @elseif($transaction['status'] == '5')
-                                            <button
-                                                wire:click="$dispatch('toggleChangeStatus', { order_number: '{{ $transaction['order_number'] }}' })"
-                                                class="btn btn-outline btn-info btn-xs">
+                                            @elseif($transaction['status'] == '5')
                                                 Pesanan Selesai
-                                            </button>
-                                        @endif
+                                            @endif
                                         </button>
                                     @break
                                 @endforeach

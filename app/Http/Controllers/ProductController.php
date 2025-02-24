@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Coment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,10 @@ class ProductController extends Controller
 
     public function productDetails($id){
         $product = Product::find($id);
+        $coments = Coment::where('product_id', $id)->get();
         return view('page.detailProduct.index',[
-            'product' => $product
+            'product' => $product,
+            'coments' => $coments
         ]);
     }
 

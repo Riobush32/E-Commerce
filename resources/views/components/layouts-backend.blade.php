@@ -7,9 +7,6 @@
     @vite('resources/css/app.css')
     {{-- icon   --}}
     <link rel="stylesheet" href="{{ asset('icons/css/all.min.css') }}">
-    {{-- alpine  --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     {{-- editor --}}
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
@@ -18,7 +15,7 @@
 
 <body class="font-body scrollbar scrollbar-thumb-primary h-[100vh] ">
     <div class="fixed top-0 w-full z-[9999]">
-        @include('backend.components.navbar')
+        @livewire('backend.navbar')
     </div>
     <div class="mt-28 w-full flex items-center justify-center px-20">
         <div class="w-full">
