@@ -4,8 +4,8 @@
             <i class="fa-solid fa-hand-holding-dollar"></i>
         </div>
         <div class="">
-            <h1 class="text-md font-semibold">Lorem, ipsum dolor.</h1>
-            <p class="text-sm">Lorem ipsum dolor sit amet.</p>
+            <h1 class="text-md font-semibold">Pembayaran Aman</h1>
+            <p class="text-sm">Pembayaran mudah dan aman.</p>
         </div>
     </div>
 
@@ -14,8 +14,8 @@
             <i class="fa-solid fa-truck-fast"></i>
         </div>
         <div class="">
-            <h1 class="text-md font-semibold">Lorem, ipsum dolor.</h1>
-            <p class="text-sm">Lorem ipsum dolor sit amet.</p>
+            <h1 class="text-md font-semibold">Pengiriman Cepat</h1>
+            <p class="text-sm">Kirim cepat sampai tujuan</p>
         </div>
     </div>
 
@@ -24,8 +24,8 @@
             <i class="fa-solid fa-boxes-packing"></i>
         </div>
         <div class="">
-            <h1 class="text-md font-semibold">Lorem, ipsum dolor.</h1>
-            <p class="text-sm">Lorem ipsum dolor sit amet.</p>
+            <h1 class="text-md font-semibold">Dukungan Pelanggan</h1>
+            <p class="text-sm">Bantuan pelanggan 24/7.</p>
         </div>
     </div>
 </div>

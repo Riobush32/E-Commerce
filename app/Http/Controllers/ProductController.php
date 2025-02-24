@@ -10,8 +10,14 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
+        $Banner = Product::latest()->get();
         return view('page.home.index', [
+            'Banner' => $Banner
         ]);
+    }
+
+    public function allProduct(){
+        return view('page.home.all-product');
     }
 
     public function productDetails($id){

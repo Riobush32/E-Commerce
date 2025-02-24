@@ -15,6 +15,7 @@ use App\Http\Controllers\BackendCategoryController;
 use App\Http\Controllers\BackendTransactionController;
 
 Route::get('/', [ProductController::class,'index'])->name('home');
+Route::get('/all-product', [ProductController::class,'allProduct'])->name('allProduct');
 Route::get('/detail-product/{id}', [ProductController::class,'productDetails'])->name('productDetails');
 Route::post('/detail-product', [ProductController::class, 'addToCart'])->name('addToCart');
 

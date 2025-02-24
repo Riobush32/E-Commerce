@@ -4,10 +4,10 @@
             <h1 class="text-5xl">Latest Arrival</h1>
         </div>
         <div class="">
-            <button class="btn btn-ghost">See All Product</button>
+            <a href="{{ route('allProduct') }}" class="btn btn-ghost">See All Product</a>
         </div>
     </div>
-    
+
 
 <livewire:product-show />
 </div>
