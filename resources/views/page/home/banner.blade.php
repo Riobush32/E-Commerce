@@ -2,7 +2,7 @@
     {{-- main banner --}}
 
     <div
-        class="w-3/4 flex items-end max-h-[500px] bg-slate-100 shadow-inner rounded-xl overflow-hidden relative hover:bg-slate-200 ease-in-out duration-300">
+        class="w-3/4 flex items-end justify-between max-h-[500px] bg-slate-100 shadow-inner rounded-xl overflow-hidden relative hover:bg-slate-200 ease-in-out duration-300">
         <div class="p-16 w-2/3">
             <h1 class="text-5xl ">Produk Terbaru dan Stylish</h1>
             <p class="text-md mt-2">
@@ -13,8 +13,8 @@
                 <a href="{{ route('allProduct') }}" class="btn btn-primary text-white tracking-wide">Mulai Belanja</a>
             </div>
         </div>
-        <figure class=" h-full ">
-            <img class="h-full w-auto object-cover" src="{{ asset('img/modelBanner/model1.png') }}" alt="">
+        <figure class=" h-full w-1/2 ">
+            <img class="h-full w-auto object-cover" src="{{ asset('img/modelBanner/sekawan.jpg') }}" alt="">
         </figure>
     </div>
 
