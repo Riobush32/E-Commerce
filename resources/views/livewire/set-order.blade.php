@@ -98,10 +98,10 @@
                         class="w-full text-white bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                         Add to cart
                     </button>
-                    <button type="button"
+                    {{-- <button type="button"
                         class="w-full text-primary hover:text-white border border-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg md:text-sm text-xs md:px-5 px-3 md:py-2.5 py-1 text-center md:me-2 me-1 md:mb-2 mb-1 ">
                         Buy
-                    </button>
+                    </button> --}}
                 @endif
 
             </div>
