@@ -1,10 +1,10 @@
-<div x-data="{ avatar: false }" @click.outside="if(avatar) avatar = false">
+<div x-data="{ avatar: false }" @click.outside="if(avatar) avatar = false" class="bg-slate-100">
     {{-- vinta manullang  --}}
     <div class="w-full flex items-center justify-arund gap-2 px-16 py-2">
-        <a href="{{ route('home') }}" class="font-logo font-bold text-xl w-1/6 flex items-center text">
+        <a href="{{ route('home') }}" class="font-logo font-bold text-xl md:w-1/6 flex items-center text">
             Vinta Manullang
         </a>
-        <div class="w-3/6 flex items-center justify-center">
+        <div class="hidden w-3/6 md:flex items-center justify-center">
             <div class="join">
                 <div>
                     <div>
@@ -24,7 +24,7 @@
                         class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
-        <div class="w-2/6 flex items-center gap-5 justify-end">
+        <div class="hidden w-2/6 md:flex items-center gap-5 justify-end">
 
             <div class="flex items-center">
 

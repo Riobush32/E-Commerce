@@ -1,4 +1,4 @@
-<div class="p-0.5 bg-slate-100">
+<div class="hidden md:block p-0.5 bg-slate-100">
     <div class="mx-16">
         {{-- promotion --}}
         <div class="flex items-center justify-between">

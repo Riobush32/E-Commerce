@@ -1,26 +1,26 @@
-<section class="flex gap-4 w-full max-h-[510px] justify-center items-center overflow-hidden rounded-xl">
+<section class="md:flex gap-4 w-full max-h-[510px] justify-center items-center overflow-hidden rounded-xl">
     {{-- main banner --}}
 
     <div
-        class="w-3/4 flex items-end justify-between max-h-[500px] bg-slate-100 shadow-inner rounded-xl overflow-hidden relative hover:bg-slate-200 ease-in-out duration-300">
-        <div class="p-16 w-2/3">
-            <h1 class="text-5xl ">Produk Terbaru dan Stylish</h1>
-            <p class="text-md mt-2">
+        class="md:w-3/4 flex flex-col-reverse md:flex-row items-end justify-between max-h-[500px] bg-slate-100 shadow-inner rounded-xl overflow-hidden relative hover:bg-slate-200 ease-in-out duration-300">
+        <div class="p-2 md:p-16 md:w-2/3">
+            <h1 class="text-xl md:text-5xl ">Produk Terbaru dan Stylish</h1>
+            <p class="text-xs md:text-md mt-1 md:mt-2">
                 Temukan koleksi terbaru dengan desain terkini yang siap membuat penampilanmu semakin stylish. Dapatkan
                 produk berkualitas dengan harga yang terjangkau!
             </p>
             <div class="mt-2">
-                <a href="{{ route('allProduct') }}" class="btn btn-primary text-white tracking-wide">Mulai Belanja</a>
+                <a href="{{ route('allProduct') }}" class="btn btn-sm md:btn-md btn-primary text-white tracking-wide">Mulai Belanja</a>
             </div>
         </div>
-        <figure class=" h-full w-1/2 ">
+        <figure class="h-full md:w-1/2 ">
             <img class="h-full w-auto object-cover" src="{{ asset('img/modelBanner/sekawan.jpg') }}" alt="">
         </figure>
     </div>
 
     {{-- banner ke 2  --}}
 
-    <div class="w-1/3 gap-4 py-5 content-between grid grid-cols-1 h-full">
+    <div class="hidden w-1/3 gap-4 py-5 content-between md:grid grid-cols-1 h-full">
         @if ($Banner != null)
             @foreach ($Banner as $index => $item)
                 <a href="{{ route('productDetails', ['id' => $item->id]) }}"

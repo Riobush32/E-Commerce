@@ -1,5 +1,5 @@
 <!doctype html>
-<html  data-theme="mytheme">
+<html  data-theme="mytheme" class="bg-slate-100">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
     <livewire:component-navbar-search />
   </div>
 
-  <div class="px-16 mt-2 pt-24 ">
+  <div class="px-2 md:px-16 mt-2 pt-20 md:pt-24 ">
     {{$slot}}
   </div>
   <x-component-footer></x-component-footer>

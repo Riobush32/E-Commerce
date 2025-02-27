@@ -3,9 +3,9 @@
         <a href="{{ route('productDetails', ['id' => $product->id]) }}"
             class="overflow-hidden rounded-3xl shadow-lg bg-slate-100 raltive hover:shadow-xl hover:bg-slate-200 hover:shadow-black hover:scale-105 duration-300 ease-in-out">
             {{-- discount  --}}
-            <div class="absolute m-3 py-0.5 px-3 z-10 bg-red-600 rounded-full text-sm text-white">
+            {{-- <div class="absolute m-3 py-0.5 px-3 z-10 bg-red-600 rounded-full text-sm text-white">
                 Sale 90% off
-            </div>
+            </div> --}}
 
             <div class="h-80 overflow-hidden ">
                 @if ($product->product_photos->isNotEmpty())
