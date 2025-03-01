@@ -140,6 +140,15 @@ class DetailProduct extends Component
         if ($this->productImage) {
             $filename = 'product-' . time() . '.' . $this->productImage->getClientOriginalExtension();
             $this->productImage->storeAs('uploads/real', $filename);
+            dd($this->productImage);
+            // dd(public_path('uploads'));
+            // $folderPath = public_path('uploads');
+
+            // if (!file_exists($folderPath)) {
+            //     mkdir($folderPath, 0775, true);
+            // }
+            // $image = $this->productImage;
+            // $image->move($folderPath, $filename);
 
             // Simpan informasi ke database
             ProductPhoto::create([
