@@ -91,7 +91,11 @@
     <div class="">
         <div x-show="detail_ongkir" @click.outside="detail_ongkir=false"
             class="absolute top-0 left-1/2 p-4 bg-white shadow-md border border-primary rounded-md z-30 delay-1000">
+
             @if ($ongkir)
+            @php
+                dd($ongkir);
+            @endphp
                 <h3 class="text-lg font-bold">Opsi Pengiriman</h3>
                 <ul>
                     @foreach ($ongkir as $courier)

@@ -158,18 +158,7 @@ class DetailProduct extends Component
     {
         // Pastikan ada file yang di-upload
         if ($this->productImage) {
-            // $filename = 'product-' . time() . '.' . $this->productImage->getClientOriginalExtension();
             $filename = $this->productImage->getFilename();
-            // $this->productImage->storeAs('uploads/real', $filename);
-            // dd($this->productImage, $filename);
-            // dd(public_path('uploads'));
-            // $folderPath = public_path('uploads');
-
-            // if (!file_exists($folderPath)) {
-            //     mkdir($folderPath, 0775, true);
-            // }
-            // $image = $this->productImage;
-            // $image->move($folderPath, $filename);
 
             // Simpan informasi ke database
             ProductPhoto::create([
@@ -182,30 +171,13 @@ class DetailProduct extends Component
             $this->reset('productImage');
             $this->dispatch('UpdateProductPhotoInList');
             session()->flash('message', 'Produk Image berhasil disimpan!');
-            // $folderPath = public_path('uploads/livewire-tmp');
-            // if (File::exists($folderPath)) {
-            //     // Ambil semua file dalam folder
-            //     $files = File::files($folderPath);
-
-            //     // Loop dan hapus file satu per satu
-            //     foreach ($files as $file) {
-            //         File::delete($file);
-            //     }
-
-            //     session()->flash('message', 'Semua file berhasil dihapus.');
-            // } else {
-            //     session()->flash('error', 'Folder tidak ditemukan.');
-            // }
         }
     }
 
     public function saveVariant()
     {
         if ($this->idProduct != null || $this->variantName != null || $this->variantWeight != null || $this->variantImage != null) {
-            // $filename = 'variant-' . time() . '.' . $this->variantImage->getClientOriginalExtension();
             $filename = $this->variantImage->getFilename();
-            // $this->variantImage->storeAs('uploads/real', $filename);
-            // Simpan informasi ke database
             Variant::create([
                 'product_id' => $this->idProduct,
                 'name' => $this->variantName,
@@ -219,20 +191,6 @@ class DetailProduct extends Component
             $this->variantWeight = null;
             $this->dispatch('UpdateProductPhotoInList');
             session()->flash('message', 'Produk Image berhasil disimpan!');
-            // $folderPath = public_path('uploads/livewire-tmp');
-            // if (File::exists($folderPath)) {
-            //     // Ambil semua file dalam folder
-            //     $files = File::files($folderPath);
-
-            //     // Loop dan hapus file satu per satu
-            //     foreach ($files as $file) {
-            //         File::delete($file);
-            //     }
-
-            //     session()->flash('message', 'Semua file berhasil dihapus.');
-            // } else {
-            //     session()->flash('error', 'Folder tidak ditemukan.');
-            // }
         }
     }
 
