@@ -108,36 +108,44 @@ class CartSummary extends Component
         $shippingAddress = Shipping::where('user_id', $user_id)->first();
         $this->shippingAddress = $shippingAddress;
         if (!empty($shippingAddress) && $this->weight > 0) {
-            $response = Http::withHeaders([
-                'key' => '29ef8b4236d9895dcefb110e9bdf366b',
-            ])->post('https://api.rajaongkir.com/starter/cost', [
-                'origin' => 15,
-                'destination' => $shippingAddress->city_id,
-                'weight' => number_format($this->weight * 1000, 2),
-                'courier' => 'jne',
-            ]);
-            // dd($this->shippingAddress->city_id);
-            if ($response->successful()) {
-                // dd('berhasil');
+            try {
+                $response = Http::withHeaders([
+                    'key' => env('RAJAONGKIR_API_KEY'),
+                ])->post(env('RAJAONGKIR_API_URL'). 'cost', [
+                    'origin' => 15,
+                    'destination' => $shippingAddress->city_id,
+                    'weight' => number_format($this->weight * 1000, 2),
+                    'courier' => 'jne',
+                ]);
 
-                $this->ongkir = $response['rajaongkir']['results'];
-                $this->isShippingAddress = true;
-                $this->check_ongkir = true;
-                foreach ($this->ongkir as $courier) {
-                    foreach ($courier['costs'] as $cost) {
-                        $this->shippingCost = $cost['cost'][0]['value'];
-                        $this->estimation = $cost['cost'][0]['etd'];
-                        break;
+                if ($response->successful()) {
+                    // dd('berhasil');
+
+                    $this->ongkir = $response['rajaongkir']['results'];
+                    $this->isShippingAddress = true;
+                    $this->check_ongkir = true;
+                    foreach ($this->ongkir as $courier) {
+                        foreach ($courier['costs'] as $cost) {
+                            $this->shippingCost = $cost['cost'][0]['value'];
+                            $this->estimation = $cost['cost'][0]['etd'];
+                            break;
+                        }
                     }
+                    $this->payment = $this->subtotal + $this->discount + $this->shippingCost;
+                    $this->check_ongkir = true;
+                } else {
+
+                    $this->check_ongkir = false;
                 }
-                $this->payment = $this->subtotal + $this->discount + $this->shippingCost;
-                $this->check_ongkir = true;
-            } else {
-                // dd('gagal');
-                $this->ongkir = ['name' => 'tidak ditemukan'];
-                $this->isShippingAddress = false;
-                $this->check_ongkir = false;
+            } catch (\Exception $e){
+                return [];
             }
+
+            // dd($this->shippingAddress->city_id);
+            // delay disini
+            // sleep(2);
+
+            // batas delay
         } else {
             $this->check_ongkir = false;
             $this->check = 'gagal';
