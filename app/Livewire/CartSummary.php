@@ -35,7 +35,8 @@ class CartSummary extends Component
     public $snap;
 
     #[On('snap')]
-    public function snap(){
+    public function snap()
+    {
         $this->snap = true;
     }
     #[On('pay')]
@@ -51,18 +52,18 @@ class CartSummary extends Component
         \Midtrans\Config::$is3ds = true;
         $orderId = rand();
 
-        $params = array(
-            'transaction_details' => array(
+        $params = [
+            'transaction_details' => [
                 'order_id' => $orderId,
                 'gross_amount' => $this->payment,
-            ),
-            'customer_details' => array(
+            ],
+            'customer_details' => [
                 'first_name' => $this->shippingAddress->name,
                 'last_name' => '',
                 'email' => Auth::user()->email,
                 'phone' => $this->shippingAddress->no_hp,
-            ),
-        );
+            ],
+        ];
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $this->snapToken = $snapToken;
@@ -77,10 +78,11 @@ class CartSummary extends Component
             'subtotal' => $this->subtotal,
             'weight' => $this->weight,
             'cart_selected' => implode(';', $this->selectedItems),
-            'estimations' => $this->estimation
+            'estimations' => $this->estimation,
         ]);
         $summary = Summary::where('user_id', Auth::user()->id)
-                        ->where('snap_token', $this->snapToken)->first();
+            ->where('snap_token', $this->snapToken)
+            ->first();
         return redirect()->route('payment', ['id' => $summary->id]);
     }
 
@@ -111,7 +113,7 @@ class CartSummary extends Component
             ])->post('https://api.rajaongkir.com/starter/cost', [
                 'origin' => 15,
                 'destination' => $shippingAddress->city_id,
-                'weight' => number_format($this->weight * 1000,2),
+                'weight' => number_format($this->weight * 1000, 2),
                 'courier' => 'jne',
             ]);
             // dd($this->shippingAddress->city_id);
@@ -127,16 +129,15 @@ class CartSummary extends Component
                         $this->estimation = $cost['cost'][0]['etd'];
                         break;
                     }
-
                 }
                 $this->payment = $this->subtotal + $this->discount + $this->shippingCost;
+                $this->check_ongkir = true;
             } else {
                 // dd('gagal');
                 $this->ongkir = ['name' => 'tidak ditemukan'];
                 $this->isShippingAddress = false;
                 $this->check_ongkir = false;
             }
-            $this->check_ongkir = true;
         } else {
             $this->check_ongkir = false;
             $this->check = 'gagal';
