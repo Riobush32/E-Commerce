@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\BackendChat;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatController;
@@ -59,3 +60,4 @@ Route::get('/backend/brand/', [BackendBrandController::class, 'index'])->name('b
 Route::get('/backend/category/', [BackendCategoryController::class, 'index'])->name('backendCategory');
 Route::get('backend/transaction/', [BackendTransactionController::class, 'index'])->name('backendTransaction');
 Route::post('backend/transaction/print', [BackendTransactionController::class, 'print'])->name('backendTransactionPrint');
+Route::get('/backend/chat/', [BackendChat::class, 'index'])->name('backendChat');
