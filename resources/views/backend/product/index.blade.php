@@ -20,14 +20,14 @@
                     setupEvents();
                     setEditDescription();
                     setEditInfo();
-                }, 500);
+                }, 1500);
 
             });
             Livewire.on('reloadScriptVariant', (event) => {
                 console.log("Livewire event diterima. Menjalankan ulang kode JavaScript Variant.");
                 setTimeout(function() {
                     setupVariant();
-                }, 500);
+                }, 1500);
 
             });
         });

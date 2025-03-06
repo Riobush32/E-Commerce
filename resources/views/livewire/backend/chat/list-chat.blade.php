@@ -5,7 +5,7 @@
                 $sender = 0;
             @endphp
             @foreach ($chats as $chat)
-                @if ($sender = (0 && $chat->sender->role != 'admin') || ($sender != $chat->user_id && $chat->sender->role != 'admin'))
+                @if (($sender != 0 && $chat->sender->role != 'admin') && ($sender != $chat->user_id && $chat->sender->role != 'admin'))
                     <a role="alert" class="alert cursor-pointer" wire:click="chatToUser({{ $chat->user_id }})">
                         <div class="avatar">
                             <div class="ring-primary ring-offset-base-100 w-7 rounded-full ring ring-offset-2">

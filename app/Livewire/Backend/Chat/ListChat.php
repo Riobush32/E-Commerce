@@ -26,6 +26,7 @@ class ListChat extends Component
         ->get();
     }
     public function chatToUser($user_id){
+
         $this->toUser = $user_id;
         $this->chooseSender = true;
         $this->messages = Chat::where('user_id', Auth::user()->id)

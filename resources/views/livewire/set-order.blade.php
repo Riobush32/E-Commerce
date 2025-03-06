@@ -39,6 +39,8 @@
                 <h3 class="mb-2 text-sm font-medium ">Variant</h3>
                 <ul class="flex flex-wrap w-full gap-2">
                     @forelse ($productData->variants as $variant)
+                    @if($variant->stock > 0)
+
                         <li>
                             <input type="radio" id="{{ $variant->name }}" wire:model.live="variantId" name="variant"
                                 value="{{ $variant->id }}" class="hidden peer" required />
@@ -49,6 +51,7 @@
                                 </div>
                             </label>
                         </li>
+                        @endif
                     @empty
                     @endforelse
 

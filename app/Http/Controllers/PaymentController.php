@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Summary;
+use App\Models\Variant;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,13 @@ class PaymentController extends Controller
         $items = explode(";", $summary->cart_selected);
 
         Cart::whereIn('id', $items)->update(['status' => 'transaction']);
+        $carts = Cart::whereIn('id', $items)->get();
+        foreach($carts as $cart){
+            $variant = Variant::find($cart->variant_id);
+            $variant->update([
+                'stock' => $variant->stock - $cart->quantity
+            ]);
+        }
 
         $order_number = 'order-'.rand();
         foreach($items as $item){

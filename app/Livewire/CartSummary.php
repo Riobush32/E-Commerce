@@ -134,7 +134,7 @@ class CartSummary extends Component
                     $this->payment = $this->subtotal + $this->discount + $this->shippingCost;
                     $this->check_ongkir = true;
                 } else {
-
+                    dd("gagal");
                     $this->check_ongkir = false;
                 }
             } catch (\Exception $e){

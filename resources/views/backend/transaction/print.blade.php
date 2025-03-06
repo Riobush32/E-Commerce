@@ -41,15 +41,23 @@
                         <!-- row 1 -->
                         @php
                             $totalHarga = 0;
+                            $no = 1;
                         @endphp
-                        @foreach ($transactions as $index => $transaction)
+                        @foreach ($orders as $orderNumber => $transactionsByOrder)
                             <tr>
-                                <th>{{ $index+1 }}</th>
-                                <td>{{ $transaction->order_number }}</td>
+                                <th>{{ $no++ }}</th>
+                                <td>{{ $orderNumber }}</td>
                                 <td>
-                                    {{ $transaction->cart->variant->product->name }} -
-                                    {{ $transaction->cart->variant->name }} x
-                                    {{ $transaction->cart->quantity }}
+                                    @foreach ($transactionsByOrder as $transaction)
+                                        @php
+                                            $variantId = $transaction['cart']['variant_id'];
+                                            $variant = \App\Models\Variant::find($variantId);
+                                        @endphp
+                                        <p>
+                                            <span>{{ $variant->product->name }}-</span>
+                                            <span>{{ $transaction['cart']['quantity'] }}</span>
+                                        </p>
+                                    @endforeach
                                 </td>
                                 <td>{{ $transaction->user->name }}</td>
                                 <td>{{ $transaction->created_at }}</td>
@@ -78,4 +86,5 @@
 <script>
     window.print();
 </script>
+
 </html>

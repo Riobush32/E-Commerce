@@ -26,12 +26,12 @@ class CartItem extends Component
     public function updateQuantity($cartId, $action)
     {
         $cart = Cart::find($cartId);
-        if(!empty($cart)&& $cart->quantity >= 0 ){
-            if($action == 'minus'){
+        if(!empty($cart) ){
+            if($action == 'minus' && $cart->quantity > 0 ){
                 $cart->update([
                     'quantity' => $cart->quantity - 1
                 ]);
-            } elseif ($action == 'plus') {
+            } elseif ($action == 'plus' &&  $cart->quantity < $cart->variant->stock) {
                 $cart->update([
                     'quantity' => $cart->quantity + 1
                 ]);

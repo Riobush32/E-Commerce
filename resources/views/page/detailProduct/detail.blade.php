@@ -11,6 +11,8 @@
             <span class="text-secondary">{{ $coments->avg('rating') }} Ratings</span>
             <span class="text-secondary">●</span>
             <span class="text-secondary">{{ $coments->count() }} sold</span>
+            <span class="text-secondary">●</span>
+            <span class="text-secondary">{{ $product->stock }} stok</span>
         </div>
         <div class="mt-3">
             <h2 class="text-4xl">Rp {{ number_format($product->price, 0, ',', '.') }}</h2>

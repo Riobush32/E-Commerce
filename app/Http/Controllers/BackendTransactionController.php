@@ -18,10 +18,13 @@ class BackendTransactionController extends Controller
         $transactions = Transaction::whereBetween('created_at', [
             Carbon::parse($startDate)->startOfDay(),
             Carbon::parse($endDate)->endOfDay()
-        ])
-        ->get();
+        ])->with(['user', 'cart', 'summary'])
+            ->latest()
+            ->get()
+            ->groupBy('order_number');
+
         return view('backend.transaction.print' , [
-            'transactions' => $transactions,
+            'orders' => $transactions,
             'dari' => $startDate,
            'sampai' => $endDate
         ]);
