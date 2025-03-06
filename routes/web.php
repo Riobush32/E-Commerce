@@ -13,6 +13,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\BackendBrandController;
 use App\Http\Controllers\BackendProductController;
 use App\Http\Controllers\BackendCategoryController;
+use App\Http\Controllers\BackendDashboardController;
 use App\Http\Controllers\BackendTransactionController;
 
 Route::get('/', [ProductController::class,'index'])->name('home');
@@ -55,6 +56,7 @@ Route::get('/dashboard', function () {
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Back End
 // Route::get('/backend/product', [BackendProductController::class, 'index'])->name('backendProduct')->middleware([IsAdmin::class]);
+Route::get('/backend/dashboard', [BackendDashboardController::class, 'index'])->name('backendDashboard');
 Route::get('/backend/product', [BackendProductController::class, 'index'])->name('backendProduct');
 Route::get('/backend/brand/', [BackendBrandController::class, 'index'])->name('backendBrand');
 Route::get('/backend/category/', [BackendCategoryController::class, 'index'])->name('backendCategory');

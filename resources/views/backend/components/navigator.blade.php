@@ -1,4 +1,7 @@
 <div class="flex gap-2 items-center justify-center bg-slate-200 p-2 rounded-xl">
+    <div class="tooltip group" data-tip="Dashboard">
+        <a href="{{ route('backendDashboard') }}" class="{{ $active == 'dashboard' ? 'btn-md bg-fuchsia-400':'group-hover:btn-md group-hover:bg-fuchsia-400 '}} btn btn-sm  glass  bg-gray-400 transition-all ease-in-out duration-300"><i class="{{ $active == 'dashboard' ? 'text-gray-600 text-xl': 'group-hover:text-gray-600 group-hover:text-xl' }} fa-solid fa-chart-pie  text-gray-300  text-md  transition-all ease-in-out duration-300"></i></a>
+    </div>
     <div class="tooltip group" data-tip="Product">
         <a href="{{ route('backendProduct') }}" class="{{ $active == 'product' ? 'btn-md bg-primary':'group-hover:btn-md group-hover:bg-primary '}} btn btn-sm  glass  bg-gray-400 transition-all ease-in-out duration-300"><i class="{{ $active == 'product' ? 'text-gray-600 text-xl': 'group-hover:text-gray-600 group-hover:text-xl' }} fa-solid fa-shirt  text-gray-300  text-md  transition-all ease-in-out duration-300"></i></a>
     </div>
