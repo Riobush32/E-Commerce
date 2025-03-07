@@ -39,7 +39,7 @@
               <div class="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png" />
+                  src="https://tse4.mm.bing.net/th?id=OIP.ZE2YEvUMEQOyT13WVMHKtwAAAA&pid=Api&P=0&h=180" />
               </div>
             </div>
             <ul

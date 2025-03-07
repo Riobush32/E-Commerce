@@ -27,8 +27,9 @@
                     class="cursor-pointer shadow-inner bg-slate-100 flex justify-between h-[210px] items-center overflow-hidden rounded-xl  hover:bg-slate-200 ease-in-out duration-300">
                     <div class="w-1/2 pl-5 mt-8 z-10">
                         <h1 class="text-xl mb-3">{{ $item->name }}</h1>
-                        <p class="text-primary text-xl font-bold tracking-wide">Rp {{ number_format(($item->price*90/100)) }}</p>
-                        <p class="text-neutral line-through">Rp {{ number_format($item->price) }}</p>
+                        {{-- <p class="text-primary text-xl font-bold tracking-wide">Rp {{ number_format(($item->price*90/100)) }}</p> --}}
+                        <p class="text-primary text-xl font-bold tracking-wide">Rp {{ number_format(($item->price)) }}</p>
+                        {{-- <p class="text-neutral line-through">Rp {{ number_format($item->price) }}</p> --}}
                     </div>
                     <figure class="w-1/2">
                         <img class="h-full object-right-bottom" src="{{ asset($item->product_photos->first()->photo_patch) }}"

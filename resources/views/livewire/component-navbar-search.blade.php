@@ -59,7 +59,7 @@
                 <div class="avatar mr-3 group" @click="avatar = true">
                     <div @click="avatar = true"
                         class="ring-slate-700 ring-offset-base-100 w-6 rounded-full ring ring-offset-2 cursor-pointer hover:ring-primary hover:rotate-12 transition-all">
-                        <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png" />
+                        <img src="https://tse4.mm.bing.net/th?id=OIP.ZE2YEvUMEQOyT13WVMHKtwAAAA&pid=Api&P=0&h=180" />
                     </div>
                 </div>
             @endguest
@@ -82,7 +82,7 @@
 
                 <div class="flex flex-col items-center">
                     <img class="w-24 h-24 mb-3 rounded-full shadow-lg"
-                        src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png"
+                        src="https://tse4.mm.bing.net/th?id=OIP.ZE2YEvUMEQOyT13WVMHKtwAAAA&pid=Api&P=0&h=180"
                         alt="Bonnie image" />
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</h5>
                     <ul class="menu bg-transparent text-white rounded-box w-56">

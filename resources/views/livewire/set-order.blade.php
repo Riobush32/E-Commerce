@@ -6,7 +6,7 @@
         </div>
     @endif
     <div class=" p-5">
-        <div
+        {{-- <div
             class="bg-primary w-full text-white p-3 rounded-xl shadow-lg shadow-slate-400 hover:scale-105 hover:shadow-black ease-in-out duration-300">
             <div class="">
                 <h1 class="text-md fontbold">20% Off</h1>
@@ -15,7 +15,7 @@
             <div class="text-sm text-right">
                 <h2>Until Dec, 30 2024</h2>
             </div>
-        </div>
+        </div> --}}
 
         {{-- set order  --}}
         <div id="formCart" method="POST" class="p-3 mt-3 w-full border-[1px] border-primary rounded-xl shadow-lg">

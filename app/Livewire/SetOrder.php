@@ -32,18 +32,25 @@ class SetOrder extends Component
     public function setVariantData($id){
         $this->variantData = Variant::find($id);
     }
-    public function addToCart($id){
-        Cart::create([
-            'user_id' => Auth::user()->id,
-            'variant_id' => $id,
-            'status' => "cart",
-            'quantity' => $this->quantity,
-            'notes' => $this->notes,
-        ]);
-        $this->reset('variantData');
-        $this->reset('variantId');
-        $this->dispatch('updateCartValue');
-        session()->flash('message', 'berhasil disimpan ke keranjang!');
+    public function addToCart($id = null){
+        if ($id !== null) {
+        if (Auth::check()) { // Periksa apakah pengguna sudah login
+            Cart::create([
+                'user_id' => Auth::user()->id,
+                'variant_id' => $id,
+                'status' => "cart",
+                'quantity' => $this->quantity,
+                'notes' => $this->notes,
+            ]);
+            
+            $this->reset('variantData');
+            $this->reset('variantId');
+            $this->dispatch('updateCartValue');
+            session()->flash('message', 'Berhasil disimpan ke keranjang!');
+        } else {
+            session()->flash('message', 'Kamu Harus Login Terlebih Dahulu!');
+        }
+    }
     }
 //////////////////////// Add To cart////////////////////////////////////////
     public function render()
