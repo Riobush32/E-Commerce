@@ -12,7 +12,7 @@
 </head>
 <body class="font-body scrollbar scrollbar-thumb-primary">
   <div class="fixed z-50 bg-white top-0 w-full">
-    <x-component-topbar></x-component-topbar>
+    {{-- <x-component-topbar></x-component-topbar> --}}
     <livewire:component-navbar-search />
   </div>
 

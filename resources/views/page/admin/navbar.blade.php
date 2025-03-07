@@ -43,7 +43,7 @@
             <div class="avatar mr-3">
                 <div @click="avatar = !avatar"
                     class="ring-slate-700 ring-offset-base-100 w-8 rounded-full ring ring-offset-2 cursor-pointer hover:ring-primary hover:rotate-12 transition-all">
-                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png" />
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
             class="px-10 py-5 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             
             <div class="flex flex-col items-center">
-                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png"
                     alt="Bonnie image" />
                 <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
                 <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>

@@ -3,7 +3,7 @@
         @if($coment->user->user_image != null)
         <img src="{{ asset($coment->user->user_image) }}" alt="">
         @else
-        <img class="w-10 h-10 me-4 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="">
+        <img class="w-10 h-10 me-4 rounded-full" src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png" alt="">
         @endif
 
         <div class="font-medium ">

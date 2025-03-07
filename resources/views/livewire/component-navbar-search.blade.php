@@ -2,7 +2,8 @@
     {{-- vinta manullang  --}}
     <div class="w-full flex items-center justify-arund gap-2 px-16 py-2">
         <a href="{{ route('home') }}" class="font-logo font-bold text-xl md:w-1/6 flex items-center text">
-            Vinta Manullang
+            <img class="w-12" src="{{ asset('img/logo.png') }}" alt="">
+            Vinta Manulang
         </a>
         <div class="hidden w-3/6 md:flex items-center justify-center">
             <div class="join">
@@ -58,7 +59,7 @@
                 <div class="avatar mr-3 group" @click="avatar = true">
                     <div @click="avatar = true"
                         class="ring-slate-700 ring-offset-base-100 w-6 rounded-full ring ring-offset-2 cursor-pointer hover:ring-primary hover:rotate-12 transition-all">
-                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png" />
                     </div>
                 </div>
             @endguest
@@ -81,7 +82,7 @@
 
                 <div class="flex flex-col items-center">
                     <img class="w-24 h-24 mb-3 rounded-full shadow-lg"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                        src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png"
                         alt="Bonnie image" />
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</h5>
                     <ul class="menu bg-transparent text-white rounded-box w-56">
