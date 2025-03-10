@@ -4,9 +4,12 @@ namespace App\Livewire;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Summary;
 use App\Models\Variant;
 use Livewire\Component;
+use App\Models\Shipping;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class SetOrder extends Component
 {
@@ -34,23 +37,136 @@ class SetOrder extends Component
     }
     public function addToCart($id = null){
         if ($id !== null) {
-        if (Auth::check()) { // Periksa apakah pengguna sudah login
-            Cart::create([
-                'user_id' => Auth::user()->id,
-                'variant_id' => $id,
-                'status' => "cart",
-                'quantity' => $this->quantity,
-                'notes' => $this->notes,
-            ]);
-            
-            $this->reset('variantData');
-            $this->reset('variantId');
-            $this->dispatch('updateCartValue');
-            session()->flash('message', 'Berhasil disimpan ke keranjang!');
-        } else {
-            session()->flash('message', 'Kamu Harus Login Terlebih Dahulu!');
+            if (Auth::check()) { // Periksa apakah pengguna sudah login
+                Cart::create([
+                    'user_id' => Auth::user()->id,
+                    'variant_id' => $id,
+                    'status' => "cart",
+                    'quantity' => $this->quantity,
+                    'notes' => $this->notes,
+                ]);
+                
+                $this->reset('variantData');
+                $this->reset('variantId');
+                $this->dispatch('updateCartValue');
+                session()->flash('message', 'Berhasil disimpan ke keranjang!');
+            } else {
+                session()->flash('message', 'Kamu Harus Login Terlebih Dahulu!');
+            }
         }
     }
+    public function buyNow($id = null) {
+        if ($id !== null) {
+            $user_id = Auth::user()->id;
+            $shipping = Shipping::where('user_id', $user_id)->first();
+            if($shipping !== null) {
+
+                if (Auth::check()) { // Periksa apakah pengguna sudah login
+                    $data = Cart::create([
+                        'user_id' => Auth::user()->id,
+                        'variant_id' => $id,
+                        'status' => "cart",
+                        'quantity' => $this->quantity,
+                        'notes' => $this->notes,
+                    ]);
+
+                    $dataId = $data->id;
+                    $dataWeight = $data->variant->weight * $data->quantity;
+                    $dataSubTotal = $data->variant->product->price * $data->quantity;
+
+                    if (!empty($shipping) && $dataWeight > 0) {
+                        try {
+                            $response = Http::withHeaders([
+                                'key' => env('RAJAONGKIR_API_KEY'),
+                            ])->post(env('RAJAONGKIR_API_URL'). 'cost', [
+                                'origin' => 15,
+                                'destination' => $shipping->city_id,
+                                'weight' => number_format($dataWeight * 1000, 2),
+                                'courier' => 'jne',
+                            ]);
+
+                            if ($response->successful()) {
+                                $discount = 0;
+                                // dd('berhasil');
+
+                                $ongkir = $response['rajaongkir']['results'];
+                                $isShippingAddress = true;
+                                foreach ($ongkir as $courier) {
+                                    foreach ($courier['costs'] as $cost) {
+                                        $shippingCost = $cost['cost'][0]['value'];
+                                        $estimation = $cost['cost'][0]['etd'];
+                                        break;
+                                    }
+                                }
+                                $payment = $dataSubTotal + $discount + $shippingCost;
+                                
+                                // Set your Merchant Server Key
+                                \Midtrans\Config::$serverKey = 'SB-Mid-server-3X39MOPAb84SAKeuknSqUIRn';
+                                // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+                                \Midtrans\Config::$isProduction = false;
+                                // Set sanitization on (default)
+                                \Midtrans\Config::$isSanitized = true;
+                                // Set 3DS transaction for credit card to true
+                                \Midtrans\Config::$is3ds = true;
+                                $orderId = rand();
+
+                                $params = [
+                                    'transaction_details' => [
+                                        'order_id' => $orderId,
+                                        'gross_amount' => $payment,
+                                    ],
+                                    'customer_details' => [
+                                        'first_name' => $shipping->name,
+                                        'last_name' => '',
+                                        'email' => Auth::user()->email,
+                                        'phone' => $shipping->no_hp,
+                                    ],
+                                ];
+
+                                $snapToken = \Midtrans\Snap::getSnapToken($params);
+                                Summary::create([
+                                    'snap_token' => $snapToken,
+                                    'payment' => $payment,
+                                    'orderid' => $orderId,
+                                    'user_id' => Auth::user()->id,
+                                    'shipping_id' => $shipping->id,
+                                    'shipping_cost' => $shippingCost,
+                                    'discount' => $discount,
+                                    'subtotal' => $dataSubTotal,
+                                    'weight' => $dataWeight,
+                                    'cart_selected' => $dataId,
+                                    'estimations' => $estimation,
+                                ]);
+                                $summary = Summary::where('user_id', Auth::user()->id)
+                                    ->where('snap_token', $snapToken)
+                                    ->first();
+                                return redirect()->route('payment', ['id' => $summary->id]);
+                            } else {
+                                dd("gagal");
+                                $check_ongkir = false;
+                            }
+                        } catch (\Exception $e){
+                            return [];
+                        }
+
+                    } else {
+                        $check_ongkir = false;
+                        $check = 'gagal';
+                    }
+
+                    
+                    $this->reset('variantData');
+                    $this->reset('variantId');
+                    $this->dispatch('updateCartValue');
+                    session()->flash('message', 'Berhasil disimpan ke keranjang!');
+                } else {
+                    session()->flash('message', 'Kamu Harus Login Terlebih Dahulu!');
+                }
+                
+            } else {
+                return redirect('/user-address/add');
+            }
+        }
     }
 //////////////////////// Add To cart////////////////////////////////////////
     public function render()
