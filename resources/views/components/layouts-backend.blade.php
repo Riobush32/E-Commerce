@@ -10,6 +10,8 @@
     {{-- editor --}}
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/cally"></script>
+
     @livewireStyles
 </head>
 

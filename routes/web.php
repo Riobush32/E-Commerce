@@ -7,11 +7,13 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\RajaOngkirController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\BackendBrandController;
 use App\Http\Controllers\BackendProductController;
+use App\Http\Controllers\BackendVoucherController;
 use App\Http\Controllers\BackendCategoryController;
 use App\Http\Controllers\BackendDashboardController;
 use App\Http\Controllers\BackendTransactionController;
@@ -47,6 +49,11 @@ Route::get('/detail-product', function () {
 // Chat
 Route::get('/chat/{id?}', [ChatController::class, 'index'])->name('chat')->middleware('auth');
 
+//voucher
+Route::get('/voucher', [VoucherController::class, 'index'])->name('getVoucher')->middleware('auth');
+Route::post('/voucher/buy/{id}', [VoucherController::class, 'buy'])->name('buyVoucher')->middleware('auth');
+Route::get('voucher/my-voucher', [VoucherController::class, 'myVoucher'])->name('myVoucher')->middleware('auth');
+
 
 Route::get('/dashboard', function () {
     return view('page.admin.dashboard.index');
@@ -63,3 +70,4 @@ Route::get('/backend/category/', [BackendCategoryController::class, 'index'])->n
 Route::get('backend/transaction/', [BackendTransactionController::class, 'index'])->name('backendTransaction')->middleware([IsAdmin::class]);
 Route::post('backend/transaction/print', [BackendTransactionController::class, 'print'])->name('backendTransactionPrint')->middleware([IsAdmin::class]);
 Route::get('/backend/chat/', [BackendChat::class, 'index'])->name('backendChat')->middleware([IsAdmin::class]);
+Route::get('/backend/voucher/', [BackendVoucherController::class, 'index'])->name('backendVoucher');

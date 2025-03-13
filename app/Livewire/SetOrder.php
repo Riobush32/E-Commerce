@@ -2,24 +2,31 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Summary;
 use App\Models\Variant;
+use App\Models\Voucher;
 use Livewire\Component;
 use App\Models\Shipping;
+use App\Models\UserVoucher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class SetOrder extends Component
 {
     public $productData;
-    public $variantData = [], $variantId;
+    public $variantData = [], $variantId, $showMyVoucher=false, $voucherData = [];
+    public $voucherSelected = '';
+    public $discount = 0;
+    public $voucherSelectedData = [];
     public $quantity = 1;
     public $notes = "";
 
     public function mount($id){
         $this->productData = Product::find($id);
+        
     }
 ///////////////////////// Quantity ///////////////////////////////////
     public function incrementQuantity(){
@@ -55,9 +62,31 @@ class SetOrder extends Component
             }
         }
     }
+    public function voucher(){
+        $this->voucherData = UserVoucher::where('user_id',Auth::user()->id)->latest()->get();
+        $this->showMyVoucher = true;
+    }
+    public function chooseVoucher($id){
+        $this->voucherSelected = $id;
+        $this->voucherSelectedData = Voucher::find($id);
+        $this->showMyVoucher = false;
+    }
+
     public function buyNow($id = null) {
         if ($id !== null) {
             $user_id = Auth::user()->id;
+            if($this->voucherSelected !== ''){
+                $voucher = Voucher::find($this->voucherSelected);
+                if($voucher->valid_from <= Carbon::now() && $voucher->valid_until >= Carbon::now()){
+                    if($voucher->discount_type == 'fixed'){
+                        $this->discount = $voucher->discount_value;
+                    } elseif($voucher->discount_type == 'percentage'){
+                        $this->discount = $this->productData->price * $voucher->discount_value / 100;
+                    }
+                }else{
+                    $this->discount = 0;
+                }
+            }
             $shipping = Shipping::where('user_id', $user_id)->first();
             if($shipping !== null) {
 
@@ -86,7 +115,7 @@ class SetOrder extends Component
                             ]);
 
                             if ($response->successful()) {
-                                $discount = 0;
+                                $discount = $this->discount;
                                 // dd('berhasil');
 
                                 $ongkir = $response['rajaongkir']['results'];
@@ -98,7 +127,7 @@ class SetOrder extends Component
                                         break;
                                     }
                                 }
-                                $payment = $dataSubTotal + $discount + $shippingCost;
+                                $payment = ($dataSubTotal - $discount) + $shippingCost;
                                 
                                 // Set your Merchant Server Key
                                 \Midtrans\Config::$serverKey = 'SB-Mid-server-3X39MOPAb84SAKeuknSqUIRn';
