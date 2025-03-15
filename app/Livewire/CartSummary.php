@@ -157,6 +157,7 @@ class CartSummary extends Component
         }
         $shippingAddress = Shipping::where('user_id', $user_id)->first();
         $this->shippingAddress = $shippingAddress;
+        // dd(number_format($this->weight * 1000000, 2));
         if (!empty($shippingAddress) && $this->weight > 0) {
             try {
                 $response = Http::withHeaders([
@@ -164,7 +165,7 @@ class CartSummary extends Component
                 ])->post(env('RAJAONGKIR_API_URL'). 'cost', [
                     'origin' => 15,
                     'destination' => $shippingAddress->city_id,
-                    'weight' => number_format($this->weight * 1000, 2),
+                    'weight' => number_format($this->weight * 1000000, 0),
                     'courier' => 'jne',
                 ]);
 
