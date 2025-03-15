@@ -104,7 +104,7 @@ class SetOrder extends Component
                     $dataId = $data->id;
                     $dataWeight = $data->variant->weight * $data->quantity;
                     $dataSubTotal = $data->variant->product->price * $data->quantity;
-
+                    // dd($dataWeight);
                     if (!empty($shipping) && $dataWeight > 0) {
                         try {
                             $response = Http::withHeaders([
@@ -112,7 +112,7 @@ class SetOrder extends Component
                             ])->post(env('RAJAONGKIR_API_URL'). 'cost', [
                                 'origin' => 15,
                                 'destination' => $shipping->city_id,
-                                'weight' => number_format($dataWeight, 2),
+                                'weight' => number_format($dataWeight * 1000, 2),
                                 'courier' => 'jne',
                             ]);
 
