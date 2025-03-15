@@ -17,4 +17,7 @@
     <div  class="tooltip group" data-tip="Chat">
         <a href="{{ route('backendChat') }}" class="{{ $active == 'Chat' ? 'btn-md bg-green-500':'group-hover:btn-md group-hover:bg-yellow-500 '}} btn btn-sm  glass  bg-gray-400 transition-all ease-in-out duration-300"><i class="{{ $active == 'Chat' ? 'text-gray-50 text-xl': 'group-hover:text-gray-50 group-hover:text-xl ' }} fa-solid fa-comments  text-gray-300  text-md  transition-all ease-in-out duration-300"></i></a>
     </div>
+    <div  class="tooltip group" data-tip="Voucher">
+        <a href="{{ route('backendVoucher') }}" class="{{ $active == 'Voucher' ? 'btn-md bg-green-500':'group-hover:btn-md group-hover:bg-yellow-500 '}} btn btn-sm  glass  bg-gray-400 transition-all ease-in-out duration-300"><i class="{{ $active == 'Voucher' ? 'text-gray-50 text-xl': 'group-hover:text-gray-50 group-hover:text-xl ' }} fa-solid fa-ticket-simple  text-gray-300  text-md  transition-all ease-in-out duration-300"></i></a>
+    </div>
 </div>

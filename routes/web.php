@@ -40,7 +40,7 @@ Route::get('/checkout/succses/{id}', [PaymentController::class, 'checkoutSuccess
 
 
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transactionList')->middleware('auth');
-Route::post('/transaction/coment/{id}', [TransactionController::class, 'coment'])->name('transactionComent')->middleware('auth');
+Route::post('/transaction/coment/{id}/{transaction_id}', [TransactionController::class, 'coment'])->name('transactionComent')->middleware('auth');
 Route::get('/transaction/{order_number}', [TransactionController::class, 'updateStatus'])->name('transactionUpdateStatus')->middleware('auth');
 Route::get('/detail-product', function () {
     return view('page.detailProduct.index');

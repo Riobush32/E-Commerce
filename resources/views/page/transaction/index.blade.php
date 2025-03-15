@@ -113,7 +113,7 @@
                                     @if ($coment == null)
                                         <div class="card bg-base-100 w-[400px] shadow-xl">
                                             <form
-                                                action="{{ route('transactionComent', ['id' => $transaction->cart->variant->product->id]) }}"
+                                                action="{{ route('transactionComent', ['id' => $transaction->cart->variant->product->id, 'transaction' => $transaction->id] ) }}"
                                                 method="post" class="card-body">
                                                 @csrf
                                                 <div class="flex gap-3">
