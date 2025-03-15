@@ -21,16 +21,19 @@ class VoucherController extends Controller
         $voucher = Voucher::find($id);
         $userId = Auth::user()->id;
         $user = User::find($userId);
-        $point = $user->poin - $voucher->points_required;
-        
-        UserVoucher::create([
-            'user_id' => $userId,
-            'voucher_id' => $id,
-        ]);
+        if($user->poin >= $voucher->points_required){
+            $point = $user->poin - $voucher->points_required;
 
-        $user->update([
-            'poin' => $point
-        ]);
+            UserVoucher::create([
+                'user_id' => $userId,
+                'voucher_id' => $id,
+            ]);
+
+            $user->update([
+                'poin' => $point
+            ]);
+        }
+        
 
         return redirect()->back()->with('success', 'Voucher berhasil dibeli!');
     }
