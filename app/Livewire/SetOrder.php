@@ -110,7 +110,7 @@ class SetOrder extends Component
                             ])->post(env('RAJAONGKIR_API_URL'). 'cost', [
                                 'origin' => 15,
                                 'destination' => $shipping->city_id,
-                                'weight' => number_format($dataWeight * 1000, 2),
+                                'weight' => number_format($dataWeight, 2),
                                 'courier' => 'jne',
                             ]);
 
