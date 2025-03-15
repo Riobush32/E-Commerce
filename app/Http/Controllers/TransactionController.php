@@ -26,9 +26,9 @@ class TransactionController extends Controller
         return back();
     }
 
-    public function coment(Request $re, $id, $transaction_id)
+    public function coment(Request $re, $id, $transaction)
     {
-        $transaction = Transaction::find($transaction_id);
+        $transaction = Transaction::find($transaction);
         $coin = floor($transaction->summary->subtotal/1000);
         Coment::create([
             'user_id' => Auth::user()->id,
