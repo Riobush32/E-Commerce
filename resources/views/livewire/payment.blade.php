@@ -2,7 +2,14 @@
     <script type="text/javascript" src="https://app.stg.midtrans.com/snap/snap.js"
         data-client-key="{{ config('services.midtrans.client_key') }}"></script>
     <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
-    <button id="pay-button">Pay!</button>
+    <div class="flex justify-center flex-col items-center">
+        <p class="text-center text-xl ">
+            Tekan Pay untuk melanjutkan pemabayaran
+        </p>
+
+        <button id="pay-button">Pay!</button>
+    </div>
+    
 
     <!-- @TODO: You can add the desired ID as a reference for the embedId parameter. -->
     <div id="snap-container"></div>
