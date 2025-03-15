@@ -3,9 +3,9 @@
 
     <div class="carousel w-full">
         <div id="slide1" class="carousel-item relative w-full">
-            <div
-                class="md:w-3/4 flex flex-col-reverse md:flex-row items-end justify-between max-h-[500px] bg-slate-100 shadow-inner rounded-xl overflow-hidden relative hover:bg-slate-200 ease-in-out duration-300">
-                <div class="p-2 md:p-16 md:w-2/3">
+            <div style="background-image: url('{{ asset('img/modelBanner/banner-bg.jpg') }}')"
+                class="md:w-3/4  flex flex-col-reverse md:flex-row items-end bg-cover justify-between max-h-[500px] bg-slate-100 shadow-inner rounded-xl overflow-hidden relative hover:bg-slate-200 ease-in-out duration-300">
+                <div class="p-2 md:p-16 text-white md:w-2/3">
                     <h1 class="text-xl md:text-5xl ">Produk Terbaru dan Stylish</h1>
                     <p class="text-xs md:text-md mt-1 md:mt-2">
                         Temukan koleksi terbaru dengan desain terkini yang siap membuat penampilanmu semakin stylish.
@@ -17,7 +17,7 @@
                             class="btn btn-sm md:btn-md btn-primary text-white tracking-wide">Mulai Belanja</a>
                     </div>
                 </div>
-                <figure class="h-full md:w-1/2 ">
+                <figure class="h-full flex flex-end md:w-1/3 ">
                     <img class="h-full w-auto object-cover" src="{{ asset('img/modelBanner/sekawan.jpg') }}"
                         alt="">
                 </figure>
@@ -28,9 +28,9 @@
             <div class="hidden w-1/3 m-1 gap-4 py-5 content-between md:grid grid-cols-1 h-full">
                 @if ($Banner != null)
                     @foreach ($Banner as $index => $item)
-                        <a href="{{ route('productDetails', ['id' => $item->id]) }}"
-                            class="cursor-pointer shadow-inner bg-slate-100 flex justify-between h-[210px] items-center overflow-hidden rounded-xl  hover:bg-slate-200 ease-in-out duration-300">
-                            <div class="w-1/2 pl-5 mt-8 z-10">
+                        <a href="{{ route('productDetails', ['id' => $item->id]) }}" style="background-image: url('{{ asset('img/modelBanner/banner-bg.jpg') }}')"
+                            class="bg-cover cursor-pointer shadow-inner bg-slate-100 flex justify-between h-[210px] items-center overflow-hidden rounded-xl  hover:bg-slate-200 ease-in-out duration-300">
+                            <div class="w-1/2 pl-5 mt-8 z-10 text-white">
                                 <h1 class="text-xl mb-3">{{ $item->name }}</h1>
                                 {{-- <p class="text-primary text-xl font-bold tracking-wide">Rp {{ number_format(($item->price*90/100)) }}</p> --}}
                                 <p class="text-primary text-xl font-bold tracking-wide">Rp
@@ -48,8 +48,8 @@
                         @endif
                     @endforeach
                 @else
-                    <div
-                        class="shadow-inner m-1 bg-slate-100 flex max-h-[210px] items-center overflow-hidden rounded-xl  hover:bg-slate-200 ease-in-out duration-300">
+                    <div style="background-image: url('{{ asset('img/modelBanner/banner-bg.jpg') }}')"
+                        class="bg-cover shadow-inner m-1 bg-slate-100 flex max-h-[210px] items-center overflow-hidden rounded-xl  hover:bg-slate-200 ease-in-out duration-300">
                         <div class="w-2/3 pl-5 mt-8 z-10">
                             <h1 class="text-xl mb-3">Lorem ipsum dolo.</h1>
                             <p class="text-primary text-xl font-bold tracking-wide">Rp 200.000,00</p>
@@ -62,8 +62,8 @@
                     </div>
 
                     {{-- banner ke 3  --}}
-                    <div
-                        class="shadow-inner m-1 bg-slate-100 flex max-h-[210px] items-center overflow-hidden rounded-xl justify-items-stretch hover:bg-slate-200 ease-in-out duration-300">
+                    <div style="background-image: url('{{ asset('img/modelBanner/banner-bg.jpg') }}')"
+                        class="bg-cover shadow-inner m-1 bg-slate-100 flex max-h-[210px] items-center overflow-hidden rounded-xl justify-items-stretch hover:bg-slate-200 ease-in-out duration-300">
                         <div class="w-2/3 pl-5 mt-8 z-10">
                             <h1 class="text-xl mb-3">Lorem ipsum dolo.</h1>
                             <p class="text-primary text-xl font-bold tracking-wide">Rp 200.000,00</p>
