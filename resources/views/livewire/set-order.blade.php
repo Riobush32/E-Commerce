@@ -176,7 +176,7 @@
                             @endif
 
                         </div>
-                        
+
                     @endif
                 @endif
                 <div class="">subtotal</div>
@@ -203,11 +203,12 @@
                                 </span>
                             </div>
                         @endif
-                    @else
-                        <div class="text-xs md:text-lg font-bold text-gray-900  w-full mb-2 ">
-                            Rp
-                            {{ number_format($productData->price * $quantity) }}</div>
+
                     @endif
+                @else
+                    <div class="text-xs md:text-lg font-bold text-gray-900  w-full mb-2 ">
+                        Rp
+                        {{ number_format($productData->price * $quantity) }}</div>
                 @endif
                 @if ($variantData != [])
                     <button type="button" wire:click="addToCart({{ $variantData->id }})"

@@ -93,6 +93,8 @@ class CartSummary extends Component
             } else {
                 $this->discount = 0;
             }
+        } else {
+            $this->discount = 0;
         }
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);

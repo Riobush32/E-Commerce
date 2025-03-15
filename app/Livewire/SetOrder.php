@@ -86,6 +86,8 @@ class SetOrder extends Component
                 }else{
                     $this->discount = 0;
                 }
+            }else{
+                $this->discount = 0;
             }
             $shipping = Shipping::where('user_id', $user_id)->first();
             if($shipping !== null) {
