@@ -5,9 +5,12 @@
         <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
             data-client-key="SB-Mid-client-nXz52zyvp-SU88J-"></script>
         <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
-        <div class="w-full flex item-center  justify-center">
+        <div class="w-full flex-col flex items-center  justify-center">
+            <p class="text-xl text-center m-4">
+                Tekan Pay Untuk Melanjutkan Pembayaran
+            </p>
             <button id="pay-button"
-                class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pay!</button>
+                class="text-gray-900 w-16 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pay!</button>
         </div>
         {{-- <div class="w-full flex item-center  justify-center">
 
