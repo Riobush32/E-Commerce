@@ -78,15 +78,15 @@
 
 
             <div
-                class="px-10 py-5 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                class="px-10 py-5 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
 
                 <div class="flex flex-col items-center">
                     <img class="w-24 h-24 mb-3 rounded-full shadow-lg"
                         src="https://tse4.mm.bing.net/th?id=OIP.ZE2YEvUMEQOyT13WVMHKtwAAAA&pid=Api&P=0&h=180"
                         alt="Bonnie image" />
-                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</h5>
-                    <h2 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ number_format(Auth::user()->poin)  }}<i class="fa-solid fa-coins text-yellow-400"></i></h2>
-                    <ul class="menu bg-transparent text-white rounded-box w-56">
+                    <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{ Auth::user()->name }}</h5>
+                    <a href="{{ route('myVoucher') }}" class="mb-1 text-xl font-medium text-gray-900 ">{{ number_format(Auth::user()->poin)  }}<i class="fa-solid fa-coins text-yellow-400"></i></a>
+                    <ul class="menu bg-transparent text-gray-900 rounded-box w-56">
                         <li class="hover:bg-slate-600 rounded-lg"> <a href="{{ route('shippingAddress') }}">Shipping
                                 Address</a></li>
                         <li class="hover:bg-slate-600 rounded-lg"><a href="{{ route('transactionList') }}">Transactions</a>

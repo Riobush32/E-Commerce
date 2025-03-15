@@ -1,5 +1,42 @@
 <div x-data="{ detail_ongkir: false }">
-
+    @if ($showMyVoucher)
+        <div
+            class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-200 max-w-[75vw] max-h-[55vh] p-6 rounded-lg">
+            <div class=" grid grid-cols-3 gap-4">
+                @foreach ($voucherData as $voucher)
+                    <div wire:click="chooseVoucher({{ $voucher->voucher->id }})"
+                        class="{{ $voucher->voucher->valid_from <= now()->toDateString() &&
+                        now()->toDateString() <= $voucher->voucher->valid_until
+                            ? ($voucher->voucher->min_purchase <= $subtotal
+                                ? 'bg-primary'
+                                : 'bg-red-600')
+                            : 'bg-red-600' }} cursor-pointer bg-primary w-full text-white p-3 rounded-xl shadow-lg shadow-slate-400 hover:scale-105 hover:shadow-black ease-in-out duration-300">
+                        <div class="">
+                            <h1
+                                class="text-md font-bold {{ $voucher->voucher->valid_from <= now()->toDateString() &&
+                                now()->toDateString() <= $voucher->voucher->valid_until
+                                    ? ($voucher->voucher->min_purchase <= $subtotal
+                                        ? ''
+                                        : 'line-through')
+                                    : 'line-through' }}">
+                                @if ($voucher->voucher->discount_type == 'percentage')
+                                    {{ number_format($voucher->voucher->discount_value, 0) }} %
+                                @elseif($voucher->voucher->discount_type == 'fixed')
+                                    Rp {{ number_format($voucher->voucher->discount_value) }}
+                                @endif
+                                Off
+                            </h1>
+                            <p class="text-xs text-slate-200">if order <span class="text-white">Rp
+                                    {{ number_format($voucher->voucher->min_purchase) }}</span></p>
+                        </div>
+                        <div class="text-sm text-right">
+                            <h2>Until {{ $voucher->voucher->valid_until }}</h2>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
     @if ($checkout)
         <div
             class="absolute flex justify-center items-center z-30 w-screen h-screen -top-32 -left-20 bg-slate-200 bg-opacity-50 ">
@@ -129,18 +166,41 @@
             <div class="mt-3">
                 <h1>Vocher</h1>
                 <div class="w-full">
-                    <div
-                        class="bg-primary w-full text-white p-3 rounded-xl shadow-lg shadow-slate-400 hover:scale-105 hover:shadow-black ease-in-out duration-300 cursor-pointer">
-                        <div class="">
-                            <h1 class="text-md fontbold">20% Off</h1>
-                            <p class="text-xs text-slate-200">if order <span class="text-white">Rp
-                                    200.000</span>
-                            </p>
-                        </div>
-                        <div class="text-sm text-right">
-                            <h2>Until Dec, 30 2024</h2>
-                        </div>
+                   @if ($voucherSelected == '')
+                <div class="my-2">
+                    <button wire:click="voucher()" class="btn btn-sm btn-info">Gunakan Voucher</button>
+                </div>
+            @else
+                <div wire:click="voucher()"
+                    class="cursor-pointer {{ $voucherSelectedData->valid_from <= now()->toDateString() &&
+                    now()->toDateString() <= $voucherSelectedData->valid_until
+                        ? ($voucherSelectedData->min_purchase <= $subtotal
+                            ? 'bg-primary'
+                            : 'bg-red-600')
+                        : 'bg-red-600' }}  w-full text-white p-3 rounded-xl shadow-lg shadow-slate-400 hover:scale-105 hover:shadow-black ease-in-out duration-300">
+                    <div class="">
+                        <h1
+                            class="text-md font-bold {{ $voucherSelectedData->valid_from <= now()->toDateString() &&
+                            now()->toDateString() <= $voucherSelectedData->valid_until
+                                ? ($voucherSelectedData->min_purchase <= $subtotal
+                                    ? ''
+                                    : 'line-through')
+                                : 'line-through' }}">
+                            @if ($voucherSelectedData->discount_type == 'percentage')
+                                {{ number_format($voucherSelectedData->discount_value, 0) }} %
+                            @elseif($voucherSelectedData->discount_type == 'fixed')
+                                Rp {{ number_format($voucherSelectedData->discount_value) }}
+                            @endif
+                            Off
+                        </h1>
+                        <p class="text-xs text-slate-200">if order <span class="text-white">Rp
+                                {{ number_format($voucherSelectedData->min_purchase) }}</span></p>
                     </div>
+                    <div class="text-sm text-right">
+                        <h2>Until {{ $voucherSelectedData->valid_until }}</h2>
+                    </div>
+                </div>
+            @endif
                 </div>
             </div>
             {{-- detail total  --}}
@@ -171,8 +231,28 @@
                                 class="btn btn-xs btn-primary text-white font-light">set your Address</a>
                         @endif
                     </div>
-                    <div class="text-secondary">Discount</div>
-                    <div class="text-right">Rp 200.000</div>
+                    @if ($voucherSelected != '')
+                    @if (
+                        $voucherSelectedData->valid_from <= now()->toDateString() &&
+                            now()->toDateString() <= $voucherSelectedData->valid_until)
+                        <div class="">discount</div>
+                        <div class="text-xs md:text-lg font-bold text-gray-900  w-full mb-2">
+                            Rp
+                            @if (
+                                $voucherSelectedData->discount_type == 'percentage' &&
+                                    $voucherSelectedData->min_purchase <= $subtotal)
+                                {{ number_format($subtotal * ($voucherSelectedData->discount_value / 100)) }}
+                            @elseif(
+                                $voucherSelectedData->discount_type == 'fixed' &&
+                                    $voucherSelectedData->min_purchase <= $subtotal)
+                                {{ number_format($voucherSelectedData->discount_value) }}
+                            @else
+                                0
+                            @endif
+
+                        </div>
+                    @endif
+                @endif
                 </div>
                 <div class="mt-2">
                     <div class="grid grid-cols-2 gap-1 justify-between">

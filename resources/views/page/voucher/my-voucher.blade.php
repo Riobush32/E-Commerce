@@ -1,6 +1,6 @@
 <x-layouts-main>
     <div class="min-h-[80vh]">
-      <h1 class="text-xl mb-5">My Voucher</h1>
+      <h1 class="text-xl mb-5">My Voucher <a href="{{ route('getVoucher') }}" class="btn btn-xs btn-info">get more voucher</a></h1>
       <div class=" grid grid-cols-3 gap-4">
         @foreach ($vouchers as $voucher)
             <div class="card w-96 bg-base-100 shadow-sm">

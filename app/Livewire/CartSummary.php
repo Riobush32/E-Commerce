@@ -2,10 +2,13 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\Summary;
+use App\Models\Voucher;
 use Livewire\Component;
 use App\Models\Shipping;
+use App\Models\UserVoucher;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +16,7 @@ use Illuminate\Support\Facades\Http;
 
 class CartSummary extends Component
 {
+    public $showMyVoucher=false,  $voucherData = [], $voucherSelected = '', $voucherSelectedData = [];    
     public $selectedItems = [];
     public $summary = [];
     public $count_data = 0;
@@ -33,6 +37,18 @@ class CartSummary extends Component
     public $checkout = false;
     public $snapToken;
     public $snap;
+
+    public function voucher()
+    {
+        $this->voucherData = UserVoucher::where('user_id', Auth::user()->id)->latest()->get();
+        $this->showMyVoucher = true;
+    }
+    public function chooseVoucher($id)
+    {
+        $this->voucherSelected = $id;
+        $this->voucherSelectedData = Voucher::find($id);
+        $this->showMyVoucher = false;
+    }
 
     #[On('snap')]
     public function snap()
@@ -64,6 +80,20 @@ class CartSummary extends Component
                 'phone' => $this->shippingAddress->no_hp,
             ],
         ];
+
+        $user_id = Auth::user()->id;
+        if ($this->voucherSelected !== '') {
+            $voucher = Voucher::find($this->voucherSelected);
+            if ($voucher->valid_from <= Carbon::now() && $voucher->valid_until >= Carbon::now()) {
+                if ($voucher->discount_type == 'fixed') {
+                    $this->discount = $voucher->discount_value;
+                } elseif ($voucher->discount_type == 'percentage') {
+                    $this->discount = $this->subtotal * $voucher->discount_value / 100;
+                }
+            } else {
+                $this->discount = 0;
+            }
+        }
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $this->snapToken = $snapToken;
@@ -105,6 +135,18 @@ class CartSummary extends Component
     public function check_ongkir()
     {
         $user_id = Auth::user()->id;
+        if ($this->voucherSelected !== '') {
+            $voucher = Voucher::find($this->voucherSelected);
+            if ($voucher->valid_from <= Carbon::now() && $voucher->valid_until >= Carbon::now()) {
+                if ($voucher->discount_type == 'fixed') {
+                    $this->discount = $voucher->discount_value;
+                } elseif ($voucher->discount_type == 'percentage') {
+                    $this->discount = $this->subtotal * $voucher->discount_value / 100;
+                }
+            } else {
+                $this->discount = 0;
+            }
+        }
         $shippingAddress = Shipping::where('user_id', $user_id)->first();
         $this->shippingAddress = $shippingAddress;
         if (!empty($shippingAddress) && $this->weight > 0) {
@@ -131,7 +173,7 @@ class CartSummary extends Component
                             break;
                         }
                     }
-                    $this->payment = $this->subtotal + $this->discount + $this->shippingCost;
+                    $this->payment = ($this->subtotal - $this->discount) + $this->shippingCost;
                     $this->check_ongkir = true;
                 } else {
                     dd("gagal");

@@ -1,5 +1,6 @@
 <x-layouts-main>
     <div class="min-h-[80vh] ">
+      <h1 class="text-xl mb-5">Get Voucher <a href="{{ route('myVoucher') }}" class="btn btn-xs btn-info">My Voucher</a></h1>
         <div class="grid grid-cols-3 gap-2 mx-auto">
             @foreach ($vouchers as $voucher)
                 <form action="{{ route('buyVoucher', ['id' => $voucher->id]) }}" method="post" class="card w-96 bg-base-100 shadow-sm">
