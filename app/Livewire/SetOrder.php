@@ -169,6 +169,12 @@ class SetOrder extends Component
                                 $summary = Summary::where('user_id', Auth::user()->id)
                                     ->where('snap_token', $snapToken)
                                     ->first();
+                                if ($this->voucherSelected !== '') {
+                                    $userVoucher = UserVoucher::where('user_id', Auth::user()->id)
+                                        ->where('voucher_id', $this->voucherSelected)
+                                        ->first();
+                                    $userVoucher->delete();
+                                }
                                 return redirect()->route('payment', ['id' => $summary->id]);
                             } else {
                                 dd("gagal");
