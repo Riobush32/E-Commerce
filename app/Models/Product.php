@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Cart;
 use App\Models\Brand;
+use App\Models\Coment;
 use App\Models\Variant;
 use App\Models\Category;
 use App\Models\ProductPhoto;
@@ -31,6 +32,10 @@ class Product extends Model
 
     public function variants(): HasMany {
         return $this->hasMany(Variant::class);
+    }
+    public function coments(): HasMany
+    {
+        return $this->hasMany(Coment::class);
     }
 
 }

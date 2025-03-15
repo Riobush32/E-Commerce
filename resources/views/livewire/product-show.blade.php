@@ -21,7 +21,25 @@
                         <h1>{{ $product->name }} <div class="badge badge-white">NEW</div>
                         </h1>
                         <p class="text-primary text-xl">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                        {{-- <p class="text-secondary line-through">Rp 245.000</p> --}}
+                        <p class="text-secondary line-through">
+                        <div class="rating rating-xs">
+                            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                aria-label="1 star" {{ $product->coments->avg('rating') >= 1 ? 'checked' : '' }}
+                                disabled />
+                            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                aria-label="2 star" {{ $product->coments->avg('rating') >= 2 ? 'checked' : '' }}
+                                disabled />
+                            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                aria-label="3 star" {{ $product->coments->avg('rating') >= 3 ? 'checked' : '' }}
+                                disabled />
+                            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                aria-label="4 star" {{ $product->coments->avg('rating') >= 4 ? 'checked' : '' }}
+                                disabled />
+                            <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                aria-label="5 star" {{ $product->coments->avg('rating') >= 5 ? 'checked' : '' }}
+                                disabled />
+                        </div>
+                        </p>
                     </div>
                     <div class="text-xl text-red-600 hover:text-red-900 duration-300 ease-in-out cursor-pointer">
                         <i class="fa-solid fa-heart"></i>

@@ -28,7 +28,8 @@
             <div class="hidden w-1/3 m-1 gap-4 py-5 content-between md:grid grid-cols-1 h-full">
                 @if ($Banner != null)
                     @foreach ($Banner as $index => $item)
-                        <a href="{{ route('productDetails', ['id' => $item->id]) }}" style="background-image: url('{{ asset('img/modelBanner/banner-bg.jpg') }}')"
+                        <a href="{{ route('productDetails', ['id' => $item->id]) }}"
+                            style="background-image: url('{{ asset('img/modelBanner/banner-bg.jpg') }}')"
                             class="bg-cover cursor-pointer shadow-inner bg-slate-100 flex justify-between h-[210px] items-center overflow-hidden rounded-xl  hover:bg-slate-200 ease-in-out duration-300">
                             <div class="w-1/2 pl-5 mt-8 z-10 text-white">
                                 <h1 class="text-xl mb-3">{{ $item->name }}</h1>
@@ -36,7 +37,19 @@
                                 <p class="text-primary text-xl font-bold tracking-wide">Rp
                                     {{ number_format($item->price) }}
                                 </p>
-                                {{-- <p class="text-neutral line-through">Rp {{ number_format($item->price) }}</p> --}}
+                                <p class="text-neutral line-through">
+                                <div class="rating rating-xs">
+                                    <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                        aria-label="1 star" {{ $item->coments->avg('rating') >= 1 ? 'checked' : ''}} disabled />
+                                    <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                        aria-label="2 star" {{ $item->coments->avg('rating') >= 2 ? 'checked' : ''}} disabled/>
+                                    <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                        aria-label="3 star" {{ $item->coments->avg('rating') >= 3 ? 'checked' : ''}} disabled/>
+                                    <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                        aria-label="4 star" {{ $item->coments->avg('rating') >= 4 ? 'checked' : ''}} disabled/>
+                                    <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"
+                                        aria-label="5 star" {{ $item->coments->avg('rating') >= 5 ? 'checked' : ''}} disabled/>
+                                </div></p>
                             </div>
                             <figure class="w-1/2">
                                 <img class="h-full object-right-bottom"
